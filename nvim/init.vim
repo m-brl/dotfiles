@@ -1,7 +1,5 @@
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'nvimdev/dashboard-nvim'
-
 Plug 'Mofiqul/adwaita.nvim'
 
 Plug 'kristijanhusak/vim-dadbod-ui'
@@ -57,9 +55,34 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' 
 
 call plug#end()
 
+
+
+lua require('setup')
+
+
+
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <End> <Nop>
+nnoremap <Home> <Nop>
+
+nnoremap <C-x>t <cmd>:tabnew<Enter>
+nnoremap <C-x>h <cmd>:tabprevious<Enter>
+nnoremap <C-x>l <cmd>:tabnext<Enter>
+
+nnoremap bgs <cmd>lua switchTheme()<Enter>
+nnoremap ffs <cmd>Telescope find_files<Enter>
+nnoremap fts <cmd>Telescope tags<Enter>
+nnoremap bo <cmd>CocCommand git.browserOpen<Enter>
+
+
+
 set list
 set listchars=space:·,tab:»·,eol:↵,extends:»,precedes:«
 set number
+set relativenumber
 set clipboard=unnamedplus
 set colorcolumn=80
 set expandtab
@@ -72,37 +95,11 @@ set mouse=a
 
 set foldlevel=99
 set foldmethod=syntax
-"set cursorline
-"set cursorcolumn
-
-lua require('setup')
-lua require('utils')
-"lua require('ignore')
 
 let g:NERDTreeShowHidden=1
 let g:NERDTreeRespectWildIgnore=1
 "let g:nerdtree_sync_cursorline=1
 
-nnoremap <Up> <Nop>
-nnoremap <Down> <Nop>
-nnoremap <Left> <Nop>
-nnoremap <Right> <Nop>
-nnoremap <End> <Nop>
-nnoremap <Home> <Nop>
-
-"nnoremap <C-t>t <cmd>:tabnew<Enter>
-"nnoremap <C-t>w <cmd>:tabclose<Enter>
-"nnoremap <C-t>n <cmd>:tabnext<Enter>
-"nnoremap <C-t>p <cmd>:tabprevious<Enter>
-
-nnoremap bgs <cmd>lua switchTheme()<Enter>
-nnoremap ffs <cmd>Telescope find_files<Enter>
-nnoremap fts <cmd>Telescope tags<Enter>
-nnoremap bo <cmd>CocCommand git.browserOpen<Enter>
-
-
-"let g:tagbar_left = 0
-"let g:tagbar_vertical = winheight('%') / 2
 let g:NERDTreeWinPos = 'left'
 autocmd VimEnter * NERDTree
 autocmd Vimenter * wincmd p

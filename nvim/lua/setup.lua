@@ -9,10 +9,6 @@ require("telescope").setup({
     }
 })
 
-require("dashboard").setup({
-
-})
-
 function setBackground()
     time = tonumber(os.date("%H"))
     if (time >= 9 and time < 17) then
