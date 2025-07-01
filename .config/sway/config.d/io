@@ -1,0 +1,17 @@
+input type:keyboard {
+    xkb_layout fr
+    xkb_numlock enabled
+    xkb_capslock disabled
+}
+
+input type:touchpad {
+    tap enabled
+}
+
+output DP-2 {
+    position 0 0
+}
+
+output DP-5 {
+    position 1920 0
+}

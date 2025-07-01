@@ -1,0 +1,32 @@
+include $HOME/.config/sway/config.d/*
+
+#blur
+#
+
+# [---] Startup [---]
+
+exec /usr/lib/xdg-desktop-portal-wlr &
+exec /usr/lib/xdg-desktop-portal-gtk &
+
+exec mako
+exec dex --autostart --environment i3
+
+exec $HOME/.config/sway/scripts/background/switch.sh
+
+# exec xss-lock --transfer-sleep-lock -- swaylock --nofork
+
+exec discord
+exec thunderbird
+exec xmousepasteblock
+exec protonmail-bridge
+exec lxqt-policykit-agent
+
+set $refresh_i3status killall -SIGUSR1 i3status
+
+client.focused #555555 $blue #ffffff $blue
+client.unfocused #555555 #666666 #ffffff #666666
+client.focused_inactive #555555 #aaaaaa #ffffff #aaaaaa
+
+bar {
+    swaybar_command waybar
+}

@@ -1,0 +1,10 @@
+font pango:Jetbrains Mono Regular 9
+
+exec swww-daemon -f xrgb
+
+shadows enable
+
+blur enable
+blur_xray disable
+blur_passes 4
+blur_radius 10
