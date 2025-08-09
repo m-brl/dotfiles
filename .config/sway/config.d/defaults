@@ -5,5 +5,3 @@ for_window [app_id="pavucontrol"] floating enable, resize set width 50 ppt heigh
 for_window [app_id="lxqt-policykit-agent"] floating enable
 for_window [title="KCalc"] floating enable, resize set 640 400
 for_window [class="Pinentry-gtk"] floating enable, resize set 640 400
-
-for_window [app_id="kitty"] fullscreen

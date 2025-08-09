@@ -2,8 +2,9 @@ call plug#begin('~/.local/state/nvim/plugged')
 
 " [----- GIT -----]
 Plug 'tpope/vim-fugitive' " Git command wrapper
-Plug 'airblade/vim-gitgutter' " Show git diff
-Plug 'f-person/git-blame.nvim' " Show git blame
+"Plug 'airblade/vim-gitgutter' " Show git diff
+"Plug 'f-person/git-blame.nvim' " Show git blame
+Plug 'lewis6991/gitsigns.nvim'
 
 " [----- NERDTree -----]
 Plug 'scrooloose/nerdtree' " Browsing tree
@@ -27,11 +28,13 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
 
+Plug 'lspcontainers/lspcontainers.nvim'
+
 " [----- Code completion -----]
 Plug 'tpope/vim-endwise' " Auto close structures (if -> fi)
 Plug 'github/copilot.vim' " Github Copilot
 Plug 'raimondi/delimitmate' " Auto close parentheses
-" Plug 'neoclide/coc.nvim', {'branch': 'release'} " Code completion
+Plug 'mfussenegger/nvim-lint'
 
 " [----- Browse and navigation -----]
 Plug 'majutsushi/tagbar' " Tagbar
@@ -43,15 +46,16 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' } " File browsing
 " [----- UI -----]
 Plug 'ap/vim-css-color' " Display hexa colors
 Plug 'tpope/vim-surround' " Delete, change, add parentheses / quotes...
+Plug 'chentoast/marks.nvim' " Markers display
 Plug 'ryanoasis/vim-devicons' " Add dev icons
 Plug 'vim-airline/vim-airline' " Vim line
 Plug 'bronson/vim-trailing-whitespace' " Show trailing whitespace
 
 " [----- UTILS -----]
 Plug 'thinca/vim-localrc' " Local project config
-Plug 'chentoast/marks.nvim' " Markers display
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' } " Markdown preview engine
 Plug 'andweeb/presence.nvim' " Discord Rich Presence
+Plug 'edluffy/hologram.nvim' " Image displayer (kitty terminal is required)
 
 " [----- DB -----]
 Plug 'tpope/vim-dadbod'
@@ -67,5 +71,6 @@ Plug 'NLKNguyen/papercolor-theme'
 " [---- DISABLED -----]
 " Plug 'nvim-tree/nvim-web-devicons'
 " Plug 'ludovicchabant/vim-gutentags'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'} " Code completion
 
 call plug#end()

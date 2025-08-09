@@ -16,9 +16,9 @@ bindsym {
 }
 
 bindsym {
-    XF86AudioPlay exec playerctl -p firefox play-pause
-    XF86AudioNext exec playerctl -p firefox next
-    XF86AudioPrev exec playerctl -p firefox previous
+    XF86AudioPlay exec playerctl play-pause
+    XF86AudioNext exec playerctl next
+    XF86AudioPrev exec playerctl previous
 }
 
 bindsym {

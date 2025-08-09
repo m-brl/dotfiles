@@ -9,9 +9,9 @@ set listchars=space:·,tab:»·,eol:↵
 set clipboard=unnamedplus
 
 set colorcolumn=80
-set number
-set norelativenumber
 
+set nonumber
+set norelativenumber
 
 set expandtab
 set tabstop=4

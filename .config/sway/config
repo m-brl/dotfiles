@@ -5,8 +5,8 @@ include $HOME/.config/sway/config.d/*
 
 # [---] Startup [---]
 
-exec /usr/lib/xdg-desktop-portal-wlr &
-exec /usr/lib/xdg-desktop-portal-gtk &
+# exec /usr/lib/xdg-desktop-portal-wlr &
+# exec /usr/lib/xdg-desktop-portal-gtk &
 
 exec mako
 exec dex --autostart --environment i3

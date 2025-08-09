@@ -11,7 +11,8 @@
         "custom/reboot",
         "custom/power",
         "custom/browser",
-        "custom/terminal"
+        "custom/terminal",
+        "custom/sentience"
     ],
     "modules-center": [
         "sway/window",
@@ -55,13 +56,19 @@
     },
     "custom/browser": {
         "format": "  ",
-        "on-click": "librewolf",
+        "on-click": "ls ~/.librewolf/profiles | wofi --show dmenu | xargs -I {} librewolf --profile \"$HOME/.librewolf/profiles/{}\"",
         "tooltip": true,
         "tooltip-format": ""
     },
     "custom/terminal": {
         "format": "  ",
         "on-click": "kitty",
+        "tooltip": true,
+        "tooltip-format": ""
+    },
+    "custom/sentience": {
+        "format": " 🤖 ",
+        "on-click": "librewolf github.com/Sentience-Robotics",
         "tooltip": true,
         "tooltip-format": ""
     },

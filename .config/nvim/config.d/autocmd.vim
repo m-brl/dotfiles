@@ -1,4 +1,3 @@
-autocmd VimEnter * NERDTree | wincmd p
 autocmd VimEnter * Copilot disable
 
 

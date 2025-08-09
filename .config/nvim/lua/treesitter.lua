@@ -48,5 +48,3 @@ require("treesitter-context").setup {
     trim_scope = 'inner',
     mode = 'topline'
 }
-
-

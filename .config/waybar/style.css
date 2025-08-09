@@ -32,7 +32,7 @@
 #user,
 #temperature,
 #clock,
-#custom-terminal,
+#custom-sentience,
 #custom-power{
   background-color: rgba(15,27,53,0.9);
   margin-top: 6px;
@@ -65,6 +65,7 @@
 #battery,
 #pulseaudio,
 #backlight,
+#custom-terminal,
 #user{
   background-color: rgba(15,27,53,0.9);
   margin-top: 6px;
@@ -97,6 +98,7 @@
 #custom-power:hover,
 #custom-browser:hover,
 #custom-terminal:hover,
+#custom-sentience:hover,
 #window:hover {
   background-color: rgba(70, 75, 90, 0.9);
 }

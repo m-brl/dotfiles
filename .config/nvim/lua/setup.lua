@@ -1,10 +1,14 @@
-require("marks").setup({
+require('hologram').setup{
+    auto_display = true
+}
+
+require('marks').setup({
 
 })
 
-require("telescope").setup({
+require('telescope').setup({
     defaults = {
-        file_ignore_patterns = {".git/", "node_modules/", "vendor/", "external", ".cache/"}
+        file_ignore_patterns = {'.git/', 'node_modules/', 'vendor/', 'external', '.cache/'}
     },
     pickers = {
         find_files = {
@@ -13,10 +17,12 @@ require("telescope").setup({
     }
 })
 
-function setTheme()
-    if (os.getenv("TERM") == "linux") then
-        vim.cmd("colorscheme default")
-    else
-        vim.cmd("colorscheme nightfox")
-    end
-end
+require('gitsigns').setup({
+    current_line_blame = true,
+    current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = 'eol',
+        delay = 0,
+        ignore_whitespace = false
+    }
+})
