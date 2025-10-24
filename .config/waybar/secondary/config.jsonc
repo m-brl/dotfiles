@@ -1,0 +1,21 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 32,
+    "spacing": 0,
+    "output": ["DP-2"],
+    "modules-left": [
+        "hyprland/workspaces",
+    ],
+    "modules-right": [
+        "clock",
+    ],
+    "clock": {
+        "interval": 1,
+        "timezone": "America/Toronto",
+        "format": "<span color='#BF00FF'>  </span>{:%H:%M} ",
+        "tooltip": true,
+        "tooltip-format": "{:%H:%M}"
+    },
+}
+

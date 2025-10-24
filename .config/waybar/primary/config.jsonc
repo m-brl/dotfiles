@@ -1,0 +1,180 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 32,
+    "spacing": 0,
+    "output": ["eDP-1"],
+    "modules-left": [
+        "sway/mode",
+        "hyprland/workspaces",
+        "tray",
+        "custom/lock",
+        "custom/reboot",
+        "custom/power",
+        "custom/browser",
+        "custom/terminal",
+        "custom/script"
+    ],
+    "modules-center": [
+        "sway/window",
+        "cpu",
+        "custom/memory",
+        "disk",
+        "temperature"
+    ],
+    "modules-right": [
+        "network",
+        "battery",
+        "bluetooth",
+        "pulseaudio",
+        "backlight",
+        "clock",
+        "custom/user"
+    ],
+    "sway/mode": {
+        "format": "{}"
+    },
+    "sway/window": {
+        "format": "{app_id}"
+    },
+    "custom/lock": {
+        "format": "<span color='#808080'>  </span>",
+        "on-click": "bash -c 'loginctl lock-session'",
+        "tooltip": true,
+        "tooltip-format": "Lock"
+    },
+    "custom/reboot": {
+        "format": "<span color='#FFD700'>  </span>",
+        "on-click": "swaynag -t warning -m 'Do you really want to reboot your computer ?' -B 'Yes, reboot' 'systemctl reboot'",
+        "tooltip": true,
+        "tooltip-format": "Reboot"
+    },
+    "custom/power": {
+        "format": "<span color='#FF4040'>  </span>",
+        "on-click": "swaynag -t warning -m 'Do you really want to shutdown your computer ?' -B 'Yes, shutdown' 'systemctl poweroff'",
+        "tooltip": true,
+        "tooltip-format": "Shutdown"
+    },
+    "custom/browser": {
+        "format": "  ",
+        "on-click": "ls ~/.librewolf/Profiles | wofi --show dmenu | xargs -I {} librewolf --profile \"$HOME/.librewolf/Profiles/{}\"",
+        "tooltip": true,
+        "tooltip-format": ""
+    },
+    "custom/terminal": {
+        "format": "  ",
+        "on-click": "kitty",
+        "tooltip": true,
+        "tooltip-format": ""
+    },
+    "custom/script": {
+        "format": " 📜 ",
+        "on-click": "ls ~/.local/bin/ | wofi --show dmenu | xargs -I {} bash -c \"$HOME/.local/bin/{} &> ~/tmp_log\"",
+        "tooltip": true,
+        "tooltip-format": "Script"
+    },
+    "network": {
+        "on-click": "nm-connection-editor",
+        "format-wifi": "<span color='#00FFFF'> 󰤨 </span>{essid} ",
+        "format-ethernet": "<span color='#7FFF00'> </span>Wired ",
+        "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
+        "format-linked": "<span color='#FFA500'> 󱘖 </span>{ifname} (No IP) ",
+        "format-disconnected": "<span color='#FF4040'>  </span>Disconnected ",
+        "format-alt": "<span color='#00FFFF'> 󰤨 </span>{signalStrength}% ",
+        "interval": 1
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "<span color='#28CD41'> {icon} </span>{capacity}% ",
+        "format-charging": " 󱐋{capacity}%",
+        "interval": 1,
+        "format-icons": ["󰂎", "󰁼", "󰁿", "󰂁", "󰁹"],
+        "tooltip": true
+    },
+    "pulseaudio": {
+        "format": "<span color='#00FF7F'>{icon}</span>{volume}% ",
+        "format-muted": "<span color='#FF4040'> 󰖁 </span>0% ",
+        "format-icons": {
+            "headphone": "<span color='#BF00FF'>  </span>",
+            "hands-free": "<span color='#BF00FF'>  </span>",
+            "headset": "<span color='#BF00FF'>  </span>",
+            "phone": "<span color='#00FFFF'>  </span>",
+            "portable": "<span color='#00FFFF'>  </span>",
+            "car": "<span color='#FFA500'>  </span>",
+            "default": [
+                "<span color='#808080'>  </span>",
+                "<span color='#FFFF66'>  </span>",
+                "<span color='#00FF7F'>  </span>"
+            ]
+        },
+        "on-click-right": "pavucontrol -t 3",
+        "on-click": "pactl -- set-sink-mute 0 toggle",
+        "tooltip": true,
+        "tooltip-format": "Volume: {volume}%"
+    },
+    "cpu": {
+        "format": "<span color='#FF9F0A'>  </span>{usage}% ",
+        "tooltip": true
+    },
+    "custom/memory": {
+        "exec": "/home/mat/.config/waybar/scripts/memory.sh",
+        "on-click": "swaynag -t warning -m 'Do you really want to clear the cache ?' -B 'Yes, clear cache' 'bash -c \"sync && echo 3 | pkexec tee /proc/sys/vm/drop_caches &> /dev/null\"'",
+        "return-type": "json",
+        "interval": 1,
+        "format": "<span color='#8A2BE2'>  </span>{} ",
+        "tooltip": true
+    },
+    "disk": {
+        "format": "<span color='#1ABC9C'>  </span>{specific_used:0.1f}G/{specific_total:0.1f}G ",
+        "unit": "GB",
+        "path": "/home/mat",
+        "tooltip": true,
+        "tooltip-format": "salut"
+    },
+    "temperature": { 
+        "format": "<span color='#3ccc34'> </span>{temperatureC}°C ",
+        "format-critical": "<span color='#ff1e00'> </span>{temperatureC}°C"
+    },
+    "clock": {
+        "interval": 1,
+        "timezone": "America/Toronto",
+        "format": "<span color='#BF00FF'>  </span>{:%H:%M} ",
+        "tooltip": true,
+        "tooltip-format": "{:%H:%M}"
+    },
+    "custom/user": {
+        "format": "{}",
+        "exec": "whoami",
+        "on-click": "swaynag -t warning -m 'Do you really want to exit sway?' -B 'Yes, exit sway' 'i3-msg exit'"
+    },
+    "tray": {
+        "icon-size": 17,
+        "spacing": 6
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "<span color='#FFD700'>{icon}</span>{percent}% ",
+        "tooltip": true,
+        "tooltip-format": "Backlight: {percent}%",
+        "format-icons": [
+            "<span color='#696969'> 󰃞 </span>",
+            "<span color='#A9A9A9'> 󰃝 </span>",
+            "<span color='#FFFF66'> 󰃟 </span>",
+            "<span color='#FFD700'> 󰃠 </span>"
+        ]
+    },
+    "bluetooth": {
+        "format": "<span color='#00BFFF'>  </span>{status} ",
+        "on-click": "blueman-manager",
+        "format-connected": "<span color='#00BFFF'>  </span>{device_alias}",
+        "format-connected-battery": "<span color='#00BFFF'>  </span>{device_alias} {device_battery_percentage}% ",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+    }
+}
+
