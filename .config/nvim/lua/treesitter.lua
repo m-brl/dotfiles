@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup {
+require("nvim-treesitter").setup {
     ensure_installed = { "c", "cpp", "python", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
     sync_install = false,
     auto_install = true,
@@ -48,5 +48,3 @@ require("treesitter-context").setup {
     trim_scope = 'inner',
     mode = 'topline'
 }
-
-

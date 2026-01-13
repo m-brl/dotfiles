@@ -1,17 +1,17 @@
-require("mason").setup()
+require('mason').setup()
 
-require("mason-lspconfig").setup {
+require('mason-lspconfig').setup {
     automatic_enable = true,
-    ensure_installed = {"pyright", "tsserver", "rust_analyzer"}
+    ensure_installed = {'clangd', 'pyright', 'rust_analyzer'}
 }
 
 local cmp = require('cmp')
-local lspkind = require("lspkind")
+local lspkind = require('lspkind')
 
 cmp.setup {
     mapping = cmp.mapping.preset.insert({
-        ["<C-k>"] = cmp.mapping.scroll_docs(4),
-        ["<C-j>"] = cmp.mapping.scroll_docs(-4),
+        ['<C-k>'] = cmp.mapping.scroll_docs(4),
+        ['<C-j>'] = cmp.mapping.scroll_docs(-4),
         --["C-Space"] = cmp.mapping.complete()
     }),
     snippet = {
@@ -30,6 +30,7 @@ cmp.setup {
         {name = 'nvim_lsp'},
         {name = 'luasnip'},
         {name = 'buffer'},
+        {name = 'calc'},
         {
             name = 'path',
             option = {
@@ -45,24 +46,33 @@ cmp.setup {
     }),
     formatting = {
         format = lspkind.cmp_format({
-            mode = "symbol_text",
+            mode = 'symbol_text',
             maxwidth = 50,
-            ellipsis_char = "...",
+            ellipsis_char = '...',
         })
     }
 }
 
 
-local lspconfig = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-lspconfig['clangd'].setup {
-    capabilities = capabilities
-}
+vim.lsp.config('clangd', {
+    capabilities = capabilities,
+    settings = {
+        clangd = {
+            InlayHints = {
+                Designators = true,
+                Enabled = true,
+                ParameterNames = true,
+                DeducedTypes = true,
+            },
+        },
+    },
+})
 
-lspconfig['pyright'].setup {
+vim.lsp.config('pyright', {
     capabilities = capabilities
-}
+})
 
 vim.diagnostic.config({
   virtual_text = true,

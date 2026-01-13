@@ -14,8 +14,6 @@ Plug 'xuyuanp/nerdtree-git-plugin' " Show git diff on nerdtree
 " [-----  treesitter -----]
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
-Plug 'nvim-treesitter/playground'
 
 " [----- nvim-cmp -----]
 Plug 'mason-org/mason.nvim'
@@ -52,8 +50,9 @@ Plug 'tpope/vim-surround' " Delete, change, add parentheses / quotes...
 Plug 'chentoast/marks.nvim' " Markers display
 Plug 'ryanoasis/vim-devicons' " Add dev icons
 Plug 'vim-airline/vim-airline' " Vim line
-Plug 'xiyaowong/transparent.nvim'
 Plug 'bronson/vim-trailing-whitespace' " Show trailing whitespace
+Plug 'rcarriga/nvim-notify' " Notification manager
+"Plug 'xiyaowong/transparent.nvim'
 
 " [----- UTILS -----]
 Plug 'tpope/vim-dispatch'
@@ -72,6 +71,7 @@ Plug 'tomasr/molokai'
 Plug 'Mofiqul/adwaita.nvim'
 Plug 'EdenEast/nightfox.nvim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'folke/tokyonight.nvim'
 
 " [---- DISABLED -----]
 " Plug 'nvim-tree/nvim-web-devicons'
