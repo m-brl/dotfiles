@@ -1,3 +1,4 @@
+source $HOME/.config/nvim/config.d/autocmd.vim
 source $HOME/.config/nvim/config.d/plugins.vim
 
 lua require('config')

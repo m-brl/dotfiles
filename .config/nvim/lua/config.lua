@@ -10,7 +10,7 @@ vim.opt.showcmd = true
 vim.opt.termguicolors = true
 
 vim.opt.list = true
-vim.opt.listchars = { space = '·', tab = '» ', eol = '↵', trail = '#', extends = '›', precedes = '‹' }
+vim.opt.listchars = { space = '·', tab = '» ', eol = '↵', extends = '›', precedes = '‹' }
 
 vim.opt.clipboard = 'unnamedplus'
 
