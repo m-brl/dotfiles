@@ -48,11 +48,6 @@
       autoEnableSources = true;
 
       settings = {
-        #formatting = {
-        #  expandable_indicator = true;
-        #  fields = [ "kind" "abbr" "menu" ];
-        #};
-
         snippet = {
           expand = "function(args) require('luasnip').lsp_expand(args.body) end";
         };
@@ -115,8 +110,42 @@
     treesitter-context.enable = true;
 
 
-    copilot-lua.enable = true;
+    copilot-lua = {
+      enable = true;
+      settings = {
+        suggestion = {
+          enabled = true;
+          auto_trigger = true;
+          keymap = {
+            accept = "<M-l>";
+            next = "<M-]>";
+            prev = "<M-[>";
+            dismiss = "<C-]>";
+          };
+        };
+        panel.enabled = true;
+      };
+    };
     endwise.enable = true;
+
+    dap = {
+      enable = true;
+      extensions = {
+        dap-ui.enable = true;
+        dap-virtual-text.enable = true;
+      };
+    };
+
+    neotest = {
+      enable = true;
+      adapters = {
+        cpputest.enable = true;
+        gtest.enable = true;
+      };
+    };
+
+    trouble.enable = true;
+    todo-comments.enable = true;
 
     aerial = {
       enable = true;
@@ -149,16 +178,23 @@
       enable = true;
       settings.options.theme = "auto";
     };
+    bufferline = {
+        enable = true;
+    };
 
     telescope = {
       enable = true;
-
-      keymaps = {
-
-      };
     };
 
     vim-css-color.enable = true;
+    toggleterm = {
+      enable = true;
+      settings = {
+        direction = "horizontal";
+        open_mapping = "[[<C-\\>]]";
+      };
+    };
+    which-key.enable = true;
     mini = {
       enable = true;
 

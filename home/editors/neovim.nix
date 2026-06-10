@@ -4,6 +4,7 @@
   imports = [
     inputs.nixvim.homeModules.nixvim
     ./neovim-plugins.nix
+    ./neovim-bindings.nix
   ];
 
   programs.nixvim = {
@@ -41,33 +42,6 @@
       enable = true;
       flavour = "mocha";
     };
-
-    keymaps = [
-      {
-        mode = "n";
-        key = "<F7>";
-        action = "<C-o>";
-        options = {
-          desc = "Jump backward";
-        };
-      }
-      {
-        mode = "n";
-        key = "<F8>";
-        action = config.lib.nixvim.utils.mkRaw "vim.lsp.buf.definition";
-        options = {
-          desc = "LSP Go to Definition";
-        };
-      }
-      {
-        mode = "n";
-        key = "<F9>";
-        action = "<C-i>";
-        options = {
-          desc = "Jump forward";
-        };
-      }
-    ];
 
     opts = {
       laststatus = 3;
