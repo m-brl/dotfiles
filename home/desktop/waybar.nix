@@ -84,7 +84,7 @@ in
         format = " <span color='#cba6f7'>{icon}</span> ";
         format-muted = " <span color='#cba6f7'>󰝟</span> ";
         format-icons = {
-          headphone = "󰋋";
+          headphone = "󱡏";
           hands-free = "󰋎";
           headset = "󰋎";
           default = [ "󰕿" "󰖀" "󰕾" ];

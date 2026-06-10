@@ -2,6 +2,7 @@
 
 {
   services.gvfs.enable = true;
+  services.protonmail-bridge.enable = true;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -48,5 +49,9 @@
       START_CHARGE_THRESH_BAT0 = 75;
       STOP_CHARGE_THRESH_BAT0 = 81;
     };
+  };
+
+  services.tailscale = {
+    enable = true;
   };
 }

@@ -6,11 +6,15 @@
       enable = true;
       servers = {
         clangd.enable = true;
+        cmake.enable = false;
+        neocmake.enable = true;
         pyright.enable = true;
         ruff.enable = true;
         nixd.enable = true;
       };
     };
+
+    web-devicons.enable = true;
 
 
     luasnip = {
@@ -89,11 +93,22 @@
     fugitive.enable = true;
     gitsigns.enable = true;
 
+    oil = {
+      enable = true;
+
+      settings = {
+        columns = [ "icon" ];
+        view_options = {
+          show_hidden = true;
+        };
+      };
+    };
+
     treesitter = {
       enable = true;
       settings = {
-        highlight.enable = true;
         indent.enable = true;
+        highlight.enable = true;
         ensure_installed = [ "cpp" ];
       };
     };
@@ -102,17 +117,59 @@
 
     copilot-lua.enable = true;
     endwise.enable = true;
-    nvim-autopairs.enable = true;
 
-    tagbar.enable = true;
+    aerial = {
+      enable = true;
+      settings = {
+        backends = [ "lsp" "treesitter" "mardown" "man" ];
+
+        filter_kind = [
+          "Class"
+          "Constructor"
+          "Method"
+          "Function"
+          "Field"
+          "Property"
+          "Variable"
+          "Constant"
+          "Enum"
+          "EnumMember"
+          "Interface"
+          "Module"
+          "Macro"
+          "Struct"
+        ];
+ 
+        show_declaring_comp = true;
+      };
+    };
     visual-multi.enable = true;
 
-    telescope.enable = true;
+    lualine = {
+      enable = true;
+      settings.options.theme = "auto";
+    };
+
+    telescope = {
+      enable = true;
+
+      keymaps = {
+
+      };
+    };
 
     vim-css-color.enable = true;
-    mini-surround.enable = true;
+    mini = {
+      enable = true;
+
+      modules = {
+        surround.mappings = { add = "gza"; delete = "gzd"; replace = "gzr"; };
+        pairs = {};
+        comment = {};
+        files = {};
+      };
+    };
     marks.enable = true;
-    airline.enable = true;
     notify.enable = true;
 
     vim-dadbod.enable = true;

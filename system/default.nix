@@ -30,20 +30,6 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
-
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-    ];
-
-    config = {
-      common.default = [ "hyprland" "gtk" ];
-    };
-
-  };
-
   environment.sessionVariables = {
   };
 
@@ -53,6 +39,7 @@
     which
     ntfs3g
     grim slurp
+    xhost
     (catppuccin-sddm.override {
       flavor = "mocha";
       accent = "peach";

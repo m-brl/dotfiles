@@ -10,6 +10,9 @@
     graphics = {
       enable = true;
       enable32Bit = true;
+      extraPackages = with pkgs; [
+        nvidia-vaapi-driver # Traduit VA-API vers NVDEC (essentiel pour Firefox/Chrome)
+      ];
     };
 
     nvidia = {

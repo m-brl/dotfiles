@@ -8,19 +8,21 @@ let
 in
 {
   imports = [
+    ./desktop
     ./shell/zsh.nix ./shell/direnv.nix  ./shell/git.nix  ./shell/tmux.nix ./shell/kitty.nix
     ./editors/vim.nix ./editors/neovim.nix
-    ./desktop/hyprland.nix ./desktop/waybar.nix
+    ./programs/programs.nix
+    ./emails.nix
     inputs.catppuccin.homeModules.catppuccin
   ];
 
   catppuccin = {
     enable = true;
-    flavor = "macchiato";
-    accent = "blue";
+    flavor = "mocha";
+    accent = "mauve";
     hyprland.enable = false;
+    tmux.enable = false;
   };
-
 
   home.username = "mathieu";
   home.homeDirectory = "/home/mathieu";
@@ -30,16 +32,15 @@ in
     enable = true;
 
     defaultApplications = {
-      "text/html" = [ "librewolf.desktop" ];
-      "x-scheme-handler/http" = [ "librewolf.desktop" ];
-      "x-scheme-handler/https" = [ "librewolf.desktop" ];
-      "x-scheme-handler/about" = [ "librewolf.desktop" ];
-      "x-scheme-handler/unknown" = [ "librewolf.desktop" ];
+      "text/html" = [ "brave.desktop" ];
+      "x-scheme-handler/http" = [ "brave.desktop" ];
+      "x-scheme-handler/https" = [ "brave.desktop" ];
+      "x-scheme-handler/about" = [ "brave.desktop" ];
+      "x-scheme-handler/unknown" = [ "brave.desktop" ];
     };
   };
 
   home.sessionVariables = {
-    BROWSER = "librewolf";
   };
 
   programs.home-manager.enable = true;
@@ -48,64 +49,7 @@ in
     
   programs.hyprlock = {
     enable = true;
-    settings = {
-      "$font" = "SF Pro Display";
-
-      general = {
-        hide_cursor = true;
       };
-
-      background = {
-        path = "${./desktop/assets/boliviainteligente-37WxvlfW3to-unsplash.jpg}";
-      };
-
-      input-field = {
-        size = "15%, 3%";
-        outline_thickness = 1;
-        inner_color = "rgba(0, 0, 0, 0.0)";
-
-        outer_color = "rgba(ffffffee)";
-        check_color = "rgba(777777ee)";
-        fail_color = "rgba(ff6633ee)";
-
-        font_color = "rgb(143, 143, 143)";
-        fade_on_empty = "true";
-        fade_timeout = "2000";
-        rounding = 5;
-
-        font_family = "$font";
-        placeholder_text = "Input password...";
-        fail_text = "$PAMFAIL";
-
-        dots_spacing = 0.3;
-
-        position = "0, -200";
-        halign = "center";
-        valign = "center";
-      };
-
-      label = [
-        {
-          text = "$TIME";
-          font_size = "90";
-          font_family = "$font";
-
-          position = "0, -70";
-          halign = "center";
-          valign = "top";
-        }
-        {
-          text = "cmd[update:60000] date +\"%a %b %d\"";
-          font_size = 25;
-          font_family = "$font";
-
-          position = "0, -50";
-          halign = "center";
-          valign = "top";
-        }
-      ];
-    };
-  };
 
   services.hypridle = {
     enable = true;
@@ -154,7 +98,7 @@ in
 
   home.packages = with pkgs; [
     # Dev
-    gemini-cmd
+    gemini-cmd gh
     clang cmake pkg-config gnumake ninja cgdb gdb valgrind
     patchelf
     uv
@@ -165,16 +109,17 @@ in
     obs-studio
 
     # Browser
-    librewolf brave chromium libreoffice thunderbird
+    brave chromium libreoffice
 
     # DE
     hyprlauncher hyprcursor mpvpaper rofi nwg-displays wofi
+    pass-wayland
     wl-clipboard cliphist
     playerctl brightnessctl
     libnotify
 
     # Multimedia
-    pavucontrol easyeffects qpwgraph lsp-plugins ffmpeg
+    pavucontrol easyeffects qpwgraph lsp-plugins ffmpeg easyeffects
 
     # Game
     discord vesktop steam parsec-bin protonup-qt
@@ -184,6 +129,7 @@ in
     kdePackages.dolphin kdePackages.konsole
     rclone rsync
     zip unzip ripgrep nix-index
+    wl-clipboard
   ];
 
   home.pointerCursor = {

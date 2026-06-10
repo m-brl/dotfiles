@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 {
   imports = [
@@ -9,10 +9,65 @@
   programs.nixvim = {
     enable = true;
 
+    extraConfigLua = ''
+      vim.diagnostic.config({
+        virtual_text = {
+          source = "always",
+          prefix = '●',
+        },
+        float = {
+        source = "always",
+        },
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
+      })
+      '';
+
+
+    diagnostic = {
+      virtual_text = {
+        prefix = "●";
+        source = "always";
+      };
+      signs = true;
+      underline = true;
+      update_in_insert = false;
+      severity_sort = true;
+    };
+
     colorschemes.catppuccin = {
       enable = true;
       flavour = "mocha";
     };
+
+    keymaps = [
+      {
+        mode = "n";
+        key = "<F7>";
+        action = "<C-o>";
+        options = {
+          desc = "Jump backward";
+        };
+      }
+      {
+        mode = "n";
+        key = "<F8>";
+        action = config.lib.nixvim.utils.mkRaw "vim.lsp.buf.definition";
+        options = {
+          desc = "LSP Go to Definition";
+        };
+      }
+      {
+        mode = "n";
+        key = "<F9>";
+        action = "<C-i>";
+        options = {
+          desc = "Jump forward";
+        };
+      }
+    ];
 
     opts = {
       laststatus = 3;

@@ -12,6 +12,9 @@
         error_limit = 3;
       };
 
+      misc = {
+      };
+
       monitor = [
         "eDP-1, 1920x1200@60.0, 0x0, 1.0"
         "DP-2, 1920x1080@60.0, 1920x0, 1.0"
@@ -36,14 +39,33 @@
 
         border_size = 1;
 
-        "col.active_border" = "rgba(8a9bebff)";
-        "col.inactive_border" = "rgba(777777ee)";
+        "col.active_border" = "rgba(cba6f7ff)";
+        "col.inactive_border" = "rgba(181825ee)";
 
         resize_on_border = false;
 
         allow_tearing = false;
 
         layout = "dwindle";
+      };
+
+      group = {
+        "col.border_active" = "rgba(cba6f7ff)";
+        "col.border_inactive" = "rgba(181825ff)";
+
+        "col.border_locked_active" = "rgba(f38ba8ff)";
+        "col.border_locked_inactive" = "rgba(181825ff)";
+
+        groupbar = {
+          enabled = true;
+          font_size = 11;
+
+          "col.active" = "rgba(cba6f7ff)";
+          "col.inactive" = "rgba(181825ff)";
+
+          "col.locked_active" = "rgba(f38ba8ff)";
+          "col.locked_inactive" = "rgba(181825ff)";
+        };
       };
 
       dwindle = {
