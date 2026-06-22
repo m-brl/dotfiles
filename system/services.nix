@@ -1,6 +1,19 @@
 { config, pkgs, ... }:
 
 {
+  services.thinkfan = {
+    enable = true;
+    smartSupport = true;
+    levels = [
+      [0 0 53]
+      [1 48 60]
+      [3 55 70]
+      [5 65 80]
+      [7 75 85]
+      ["level auto" 80 200]
+    ];
+  };
+
   services.gvfs.enable = true;
   services.protonmail-bridge.enable = true;
   services.displayManager.sddm = {
@@ -53,5 +66,9 @@
 
   services.tailscale = {
     enable = true;
+  };
+
+  services.qbittorrent = {
+    enable = false;
   };
 }

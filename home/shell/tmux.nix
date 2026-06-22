@@ -14,8 +14,12 @@
         plugin = tmuxPlugins.catppuccin;
         extraConfig = ''
           set -g @catppuccin_flavor 'mocha'
+
           set -g @catppuccin_window_default_text "#W"
           set -g @catppuccin_window_current_text "#W"
+
+          set -g @catppuccin_window_automatic_name "off"
+          set -g @catppuccin_window_status_enable "on"
         '';
       }
 
@@ -27,7 +31,7 @@
       set -g @pass-copy-to-clipboard on
 
       set-option -g automatic-rename off
-      set-option -g allow-rename on
+      set-option -g allow-rename off
 
       bind v split-window -h
       bind s split-window -v

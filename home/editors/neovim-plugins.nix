@@ -11,6 +11,7 @@
         pyright.enable = true;
         ruff.enable = true;
         nixd.enable = true;
+        qmlls.enable = false;
       };
     };
 
@@ -85,6 +86,18 @@
     cmp-path.enable = true;
     cmp-nvim-lsp.enable = true;
 
+    conform-nvim = {
+        enable = true;
+        settings = {
+            formatters_by_ft = {
+                cpp = [ "clang-format" ];
+                python = [ "ruff_organize_imports" "ruff_format" ];
+                nix = [ "alejandra" ];
+                "_" = [ "trim_whitespace" "trim_empty_lines" "squeeze_blanks" ];
+            };
+        };
+    };
+
     fugitive.enable = true;
     gitsigns.enable = true;
 
@@ -104,7 +117,7 @@
       settings = {
         indent.enable = true;
         highlight.enable = true;
-        ensure_installed = [ "cpp" ];
+        ensure_installed = [ "cpp" "python" "yaml" "qmljs" ];
       };
     };
     treesitter-context.enable = true;
@@ -128,13 +141,9 @@
     };
     endwise.enable = true;
 
-    dap = {
-      enable = true;
-      extensions = {
-        dap-ui.enable = true;
-        dap-virtual-text.enable = true;
-      };
-    };
+    dap.enable = true;
+    dap-ui.enable = true;
+    dap-virtual-text.enable = true;
 
     neotest = {
       enable = true;
@@ -173,14 +182,15 @@
       };
     };
     visual-multi.enable = true;
+    indent-blankline.enable = true;
 
     lualine = {
       enable = true;
       settings.options.theme = "auto";
     };
-    bufferline = {
-        enable = true;
-    };
+
+    bufferline.enable = true;
+    illuminate.enable = true;
 
     telescope = {
       enable = true;
@@ -194,12 +204,15 @@
         open_mapping = "[[<C-\\>]]";
       };
     };
+    diffview = {
+        enable = true;
+    };
     which-key.enable = true;
     mini = {
       enable = true;
 
       modules = {
-        surround.mappings = { add = "gza"; delete = "gzd"; replace = "gzr"; };
+        surround.mappings = { add = "gza"; delete = "gzd"; replace = "gzr"; find = "gzf"; find_left = "gzF"; highlight = "gzh"; update_n_lines = "gzn"; };
         pairs = {};
         comment = {};
         files = {};

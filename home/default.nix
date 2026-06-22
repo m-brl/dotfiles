@@ -9,8 +9,8 @@ in
 {
   imports = [
     ./desktop
-    ./shell/zsh.nix ./shell/direnv.nix  ./shell/git.nix  ./shell/tmux.nix ./shell/kitty.nix
-    ./editors/vim.nix ./editors/neovim.nix
+    ./editors
+    ./shell
     ./programs/programs.nix
     ./emails.nix
     inputs.catppuccin.homeModules.catppuccin
@@ -32,70 +32,22 @@ in
     enable = true;
 
     defaultApplications = {
-      "text/html" = [ "brave.desktop" ];
-      "x-scheme-handler/http" = [ "brave.desktop" ];
-      "x-scheme-handler/https" = [ "brave.desktop" ];
-      "x-scheme-handler/about" = [ "brave.desktop" ];
-      "x-scheme-handler/unknown" = [ "brave.desktop" ];
+      "text/html" = [ "vivaldi-stable.desktop" ];
+      "x-scheme-handler/http" = [ "vivaldi-stable.desktop" ];
+      "x-scheme-handler/https" = [ "vivaldi-stable.desktop" ];
+      "x-scheme-handler/about" = [ "vivaldi-stable.desktop" ];
+      "x-scheme-handler/unknown" = [ "vivaldi-stable.desktop" ];
+      "x-scheme-handler/io.element.desktop" = [ "element-router.desktop" ];
+      "x-scheme-handler/element" = [ "element-router.desktop" ];
     };
   };
 
   home.sessionVariables = {
+    EDITOR = "nvim";
   };
 
   programs.home-manager.enable = true;
-
-  programs.kitty.enable = true;
     
-  programs.hyprlock = {
-    enable = true;
-      };
-
-  services.hypridle = {
-    enable = true;
-    settings = {
-      general = {
-        lock_cmd = "bash -c 'pidof hyprlock || hyprlock'";
-        unlock_cmd = "bash -c 'pkill -USR1 hyprlock'";
-        before_sleep_cmd = "bash -c 'pidof hyprlock || hyprlock'";
-        after_sleep_cmd = "bash -c 'hyprctl dispatch dpms on'";
-      };
-
-      listener = [
-        {
-          timeout = 540;
-          on-timeout = "bash -c 'notify-send \"You are idle!\"'";
-          on-resume = "bash -c 'notify-send \"Welcome back!\"'";
-        }
-
-        {
-          timeout = 600;
-          on-timeout = "bash -c 'pidof hyprlock || hyprlock'";
-        }
-      ];
-    };
-  };
-
-  services.hyprsunset = {
-    enable = true;
-    settings = {
-      max-gamma = 150;
-
-      profile = [
-        {
-          time = "7:30";
-          identity = true;
-        }
-
-        {
-          time = "21:00";
-          temperature = 5500;
-          gamma = 0.8;
-        }
-      ];
-    };
-  };
-
   home.packages = with pkgs; [
     # Dev
     gemini-cmd gh
@@ -103,13 +55,13 @@ in
     patchelf
     uv
     python313
-    jetbrains.clion jetbrains.idea jetbrains.pycharm jetbrains.mps
+    ed jetbrains.clion jetbrains.idea jetbrains.pycharm jetbrains.mps
     kicad
     quickshell
     obs-studio
 
     # Browser
-    brave chromium libreoffice
+    brave vivaldi chromium libreoffice tor-browser
 
     # DE
     hyprlauncher hyprcursor mpvpaper rofi nwg-displays wofi
@@ -140,6 +92,4 @@ in
     name = "Bibata-Modern-Classic";
     size = 24;
   };
-
-
 }

@@ -1,7 +1,10 @@
 {
   imports = [
     ./librewolf-bookmarks.nix
+    ./element.nix
   ];
+
+  programs.kitty.enable = true;
 
   programs.librewolf = {
     enable = true;

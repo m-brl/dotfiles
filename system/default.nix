@@ -34,6 +34,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    tzdata
     vim
     (btop.override { cudaSupport = true; })
     which
@@ -49,5 +50,6 @@
     swtpm
     vnstat
     cron
+    wireguard-tools libnatpmp
   ];
 }

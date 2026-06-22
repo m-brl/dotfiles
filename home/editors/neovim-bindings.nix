@@ -11,6 +11,16 @@
     }
     {
       mode = "n";
+      key = "<leader>f";
+      action = config.lib.nixvim.utils.mkRaw ''
+        function()
+          require("conform").format({ async = true, lsp_fallback = true })
+        end
+      '';
+      options = { desc = "Format with conform"; };
+    }
+    {
+      mode = "n";
       key = "<leader>ff";
       action = "<cmd>Telescope find_files<cr>";
       options = { desc = "Trouver un fichier"; };

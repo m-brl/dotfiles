@@ -23,5 +23,8 @@
       nvidiaSettings = true;
     };
 
+    nvidia-container-toolkit = {
+      enable = true;
+    };
   };
 }

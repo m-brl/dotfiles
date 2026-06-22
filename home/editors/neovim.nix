@@ -10,6 +10,10 @@
   programs.nixvim = {
     enable = true;
 
+    extraPackages = with pkgs; [
+      ruff clang-tools alejandra kdePackages.qtdeclarative
+    ];
+
     extraConfigLua = ''
       vim.diagnostic.config({
         virtual_text = {
@@ -46,7 +50,7 @@
     opts = {
       laststatus = 3;
 
-      number = true;
+      number = false;
       relativenumber = false;
 
       wrap = true;
