@@ -8,8 +8,8 @@
     syntaxHighlighting.enable = true;
 
     history = {
-      size = 10000;
-      save = 10000;
+      size = 9999;
+      save = 9999;
       share = true;
     };
 

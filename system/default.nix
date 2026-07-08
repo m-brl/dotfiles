@@ -31,6 +31,12 @@
   ];
 
   environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "nvidia";
+    GDM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    __NV_PRIME_RENDER_OFFLOAD = "1";
+    NVD_BACKEND = "direct";
+    WLR_NO_HARDWARE_CURSORS = "1";
   };
 
   environment.systemPackages = with pkgs; [
@@ -41,10 +47,6 @@
     ntfs3g
     grim slurp
     xhost
-    (catppuccin-sddm.override {
-      flavor = "mocha";
-      accent = "peach";
-    })
 
     yubikey-manager yubikey-personalization
     swtpm

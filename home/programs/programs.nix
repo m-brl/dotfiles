@@ -1,3 +1,5 @@
+{ config, pkgs, ... }:
+
 {
   imports = [
     ./librewolf-bookmarks.nix
@@ -6,25 +8,10 @@
 
   programs.kitty.enable = true;
 
-  programs.librewolf = {
+  programs.password-store = {
     enable = true;
-    profiles = {
-      mathieu = {
-        id = 0;
-        isDefault = true;
-        path = "mathieu.1";
-        extensions.force = true;
-
-        search = {
-          default = "Startpage";
-        };
-
-        settings = {
-        };
-      };
-    };
+    package = pkgs.pass-wayland;
   };
-
 
   programs.thunderbird = {
     enable = true;
@@ -33,12 +20,5 @@
         isDefault = true;
       };
     };
-  };
-
-  catppuccin.thunderbird = {
-    enable = true;
-    flavor = "macchiato";
-    accent = "mauve";
-    profile = "mathieu";
   };
 }

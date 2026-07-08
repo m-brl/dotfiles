@@ -11,7 +11,8 @@
         pyright.enable = true;
         ruff.enable = true;
         nixd.enable = true;
-        qmlls.enable = false;
+        qmlls.enable = true;
+        qmlls.cmd = [ "qmlls" "-E" ];
       };
     };
 
@@ -117,7 +118,7 @@
       settings = {
         indent.enable = true;
         highlight.enable = true;
-        ensure_installed = [ "cpp" "python" "yaml" "qmljs" ];
+        ensure_installed = [ "cpp" "python" "yaml" "qml" "qmljs" ];
       };
     };
     treesitter-context.enable = true;

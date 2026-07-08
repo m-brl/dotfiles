@@ -12,17 +12,9 @@ in
     ./editors
     ./shell
     ./programs/programs.nix
+    ./services.nix
     ./emails.nix
-    inputs.catppuccin.homeModules.catppuccin
   ];
-
-  catppuccin = {
-    enable = true;
-    flavor = "mocha";
-    accent = "mauve";
-    hyprland.enable = false;
-    tmux.enable = false;
-  };
 
   home.username = "mathieu";
   home.homeDirectory = "/home/mathieu";
@@ -65,10 +57,10 @@ in
 
     # DE
     hyprlauncher hyprcursor mpvpaper rofi nwg-displays wofi
-    pass-wayland
-    wl-clipboard cliphist
+    wl-clipboard cliphist wlr-randr
     playerctl brightnessctl
     libnotify
+    pass-wayland
 
     # Multimedia
     pavucontrol easyeffects qpwgraph lsp-plugins ffmpeg easyeffects

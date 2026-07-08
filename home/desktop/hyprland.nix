@@ -17,7 +17,6 @@
 
       monitor = [
         "eDP-1, 1920x1200@60.0, 0x0, 1.0"
-        "DP-2, 1920x1080@60.0, 1920x0, 1.0"
       ];
 
       exec-once = [
@@ -25,12 +24,6 @@
       ];
 
       env = [
-        "LIBVA_DRIVER_NAME,nvidia"
-        "XDG_SESSION_TYPE,wayland"
-        "GBM_BACKEND,nvidia-drm"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "__NV_PRIME_RENDER_OFFLOAD,1"
-        "NVD_BACKEND,direct"
       ];
 
       general = {
