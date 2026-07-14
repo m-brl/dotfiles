@@ -1,0 +1,10 @@
+Battery 1.0 Battery.qml
+Sound 1.0 Sound.qml
+Network 1.0 Network.qml
+Bluetooth 1.0 Bluetooth.qml
+Clock 1.0 Clock.qml
+HyprlandWS 1.0 HyprlandWS.qml
+Player 1.0 Player.qml
+AnalogClock 1.0 AnalogClock.qml
+SysTray 1.0 SysTray.qml
+

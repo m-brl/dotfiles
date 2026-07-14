@@ -6,7 +6,14 @@
     ./element.nix
   ];
 
-  programs.kitty.enable = true;
+  programs.kitty = {
+    enable = true;
+    autoThemeFiles = {
+      light = "Catppuccin-Latte";
+      dark = "Catppuccin-Mocha";
+      noPreference = "Catppuccin-Mocha";
+    };
+  };
 
   programs.password-store = {
     enable = true;

@@ -17,9 +17,6 @@
       set -g @pass-key 'm'
       set -g @pass-copy-to-clipboard on
 
-      set-option -g automatic-rename off
-      set-option -g allow-rename off
-
       bind v split-window -h
       bind s split-window -v
 

@@ -13,6 +13,16 @@
         nixd.enable = true;
         qmlls.enable = true;
         qmlls.cmd = [ "qmlls" "-E" ];
+        rust_analyzer = {
+          enable = true;
+          installRustc = true;
+          installCargo = true;
+          settings = {
+            check = {
+              command = "clippy";
+            };
+          };
+        };
       };
     };
 

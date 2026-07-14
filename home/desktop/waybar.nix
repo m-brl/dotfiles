@@ -21,7 +21,7 @@ let
 in
 {
   programs.waybar = {
-    enable = true;
+    enable = false;
     systemd = {
       enable = true;
       targets = [ "graphical-session.target" ];
