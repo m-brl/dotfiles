@@ -43,6 +43,7 @@ in
   home.packages = with pkgs; [
     # Dev
     gemini-cmd gh
+    obsidian
     clang cmake pkg-config gnumake ninja cgdb gdb valgrind
     patchelf
     uv
@@ -61,6 +62,7 @@ in
     playerctl brightnessctl
     libnotify
     pass-wayland
+    solaar
 
     # Multimedia
     pavucontrol easyeffects qpwgraph lsp-plugins ffmpeg easyeffects

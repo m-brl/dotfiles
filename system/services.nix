@@ -1,7 +1,72 @@
 { config, pkgs, ... }:
 
+let
+  sddmTheme = pkgs.stdenv.mkDerivation {
+    name = "custom-theme";
+    src = ./sddm-theme;
+    installPhase = ''
+      mkdir -p $out/share/sddm/themes/custom-theme
+      mkdir -p $out/share/sddm/themes/custom-theme
+      cp -r * $out/share/sddm/themes/custom-theme
+    '';
+  };
+in
 {
   services = {
+    logiops = {
+      enable = true;
+      config = {
+        devices = [
+          {
+            name = "MX Master 4";
+            dpi = 1000;
+            buttons = [
+              {
+                cid = 195;
+                action = {
+                  type = "Gestures";
+                  gestures = [
+                    {
+                      direction = "Right";
+                      mode = "OnRelease";
+                      action = {
+                        type = "Keypress";
+                        keys = ["KEY_LEFTALT" "KEY_L"];
+                      };
+                    }
+                    {
+                      direction = "Left";
+                      mode = "OnRelease";
+                      action = {
+                        type = "Keypress";
+                        keys = ["KEY_LEFTALT" "KEY_H"];
+                      };
+                    }
+                  ];
+                };
+              }
+              {
+                cid = 416;
+                action = {
+                  type = "Gestures";
+                  gestures = [
+                    {
+                      direction = "Up";
+                      mode = "OnRelease";
+                      action = {
+                        type = "Keypress";
+                        keys = ["KEY_RIGHTALT" "KEY_L"];
+                      };
+                    }
+                  ];
+                };
+              }
+            ];
+          }
+        ];
+      };
+    };
+
     thinkfan = {
       enable = true;
       smartSupport = true;
@@ -18,6 +83,15 @@
     displayManager.sddm = {
       enable = true;
       wayland.enable = true;
+      package = pkgs.kdePackages.sddm;
+      theme = "custom-theme";
+      extraPackages = [ pkgs.adwaita-icon-theme ];
+
+      settings = {
+        Theme = {
+          CursorTheme = "Adwaita";
+        };
+      };
     };
 
     pcscd.enable = true;
@@ -84,4 +158,5 @@
       enable = true;
     };
   };
+  environment.systemPackages = [ sddmTheme ];
 }

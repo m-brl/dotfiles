@@ -12,11 +12,61 @@ Item {
     property string weather;
 
     function getWeatherIcon(code) {
+        const basePath = "file:///home/mathieu/quickshell/bar/assets/weather/";
+        console.log(">" + code)
+        code = parseInt(code)
         switch (code) {
             case 0:
-                return "󰖙"
+                return basePath + "sun.png";
+
+            case 1:
+            case 2:
+                return basePath + "sun_cloud.png";
+                
+            // Couvert / Nuageux
+            case 3:
+                return basePath + "cloud.png";
+                
+            // Brouillard et givre
+            case 45:
+            case 48:
+                return basePath + "cloud.png"; // Faute d'icône brouillard
+                
+            // Bruine (Légère, modérée, dense)
+            case 51:
+            case 53:
+            case 55:
+            case 56: // Bruine verglaçante
+            case 57:
+                return basePath + "rain.png";
+                
+            // Pluie (Faible, modérée, forte)
+            case 61:
+            case 63:
+            case 65:
+            case 66: // Pluie verglaçante
+            case 67:
+            case 80: // Averses de pluie faibles
+            case 81: // Averses de pluie modérées
+            case 82: // Averses de pluie violentes
+                return basePath + "rain.png";
+                
+            // Neige (Faible, modérée, forte, grains)
+            case 71:
+            case 73:
+            case 75:
+            case 77:
+            case 85: // Averses de neige faibles
+            case 86: // Averses de neige fortes
+                return basePath + "snow.png";
+                
+            // Orage (Faible, modéré, avec grêle)
+            case 95:
+            case 96:
+            case 99:
+                return basePath + "cloud_thunder.png";
         }
-        return "󰖙"
+        return "file:///home/mathieu/quickshell/bar/assets/weather/sun.png"
     }
 
     function fetchWeather() {
@@ -33,9 +83,6 @@ Item {
                     
                         root.temperature = Math.round(current.temperature_2m) + "°C"
                         root.weather = current.weather_code
-                        root.weather = 1
-                    
-                        //updateWeather(current.weather_code)
                     } catch (e) {
                     }
                 } else {
@@ -119,7 +166,7 @@ Item {
                         Layout.preferredHeight: 40
                         Layout.preferredWidth: 40
 
-                        source: "file:///home/mathieu/quickshell/bar/assets/weather/sun.png"
+                        source: root.getWeatherIcon(root.weather)
                         fillMode: Image.PreserveAspectFit
                         sourceSize.width: Layout.preferredWidth
                         sourceSize.height: Layout.preferredHeight
@@ -138,7 +185,7 @@ Item {
                             text: root.temperature + ""
 
                             Component.onCompleted: {
-                                //root.fetchWeather()
+                                root.fetchWeather()
                             }
                         }
                     }

@@ -26,5 +26,6 @@
     nvidia-container-toolkit = {
       enable = true;
     };
+    logitech.wireless.enable = true;
   };
 }
