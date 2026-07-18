@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
@@ -12,6 +12,11 @@
     ./users.nix
     ./virtualisation.nix
   ];
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.mathieu = import ../home;
+  home-manager.extraSpecialArgs = { inherit inputs; };
   
   system.stateVersion = "25.11";
   time.timeZone = "Europe/Paris";
