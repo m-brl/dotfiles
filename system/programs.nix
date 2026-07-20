@@ -2,6 +2,7 @@
 
 {
   programs = {
+    yubikey-manager.enable = true;
     zsh.enable = true;
     git.enable = true;
     uwsm.enable = true;

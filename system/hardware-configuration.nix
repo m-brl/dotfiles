@@ -9,41 +9,43 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "thunderbolt" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/mapper/vgarch-root";
-      fsType = "xfs";
+    { device = "/dev/mapper/crypted";
+      fsType = "btrfs";
+      options = [ "subvol=@" ];
     };
 
+  boot.initrd.luks.devices."crypted".device = "/dev/disk/by-uuid/d3e43a99-e6ef-45eb-b407-71253cb54203";
+
   fileSystems."/home" =
-    { device = "/dev/mapper/vgarch-home";
-      fsType = "xfs";
+    { device = "/dev/mapper/crypted";
+      fsType = "btrfs";
+      options = [ "subvol=@home" ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/mapper/crypted";
+      fsType = "btrfs";
+      options = [ "subvol=@nix" ];
+    };
+
+  fileSystems."/var/log" =
+    { device = "/dev/mapper/crypted";
+      fsType = "btrfs";
+      options = [ "subvol=@log" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/A722-94CC";
+    { device = "/dev/disk/by-uuid/D285-15DA";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  fileSystems."/home/mathieu/Projects" =
-    { device = "/dev/disk/by-uuid/33da77b8-14dd-4faf-8195-44f2136d7d3d";
-      fsType = "xfs";
-    };
-
-
-#  fileSystems."/home/mat/disk" =
-#    { device = "/dev/disk/by-uuid/4199E7D700E7CFC9";
-#      fsType = "ntfs3";
-#      options = [ "fmask=0022" "dmask=0022" "rw" "nofail" ];
-#    };
-
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/dd4f38b6-32f0-4b7e-bb1e-b3d46ae910d2"; }
-    ];
+  swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

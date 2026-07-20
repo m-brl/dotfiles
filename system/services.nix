@@ -84,7 +84,6 @@ in
       enable = true;
       wayland.enable = true;
       package = pkgs.kdePackages.sddm;
-      theme = "custom-theme";
       extraPackages = [ pkgs.adwaita-icon-theme ];
 
       settings = {
