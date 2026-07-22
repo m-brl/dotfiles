@@ -38,7 +38,7 @@ in
         name = "element-${account_lower}";
         desktopName = "Element ${account}";
         exec = "${element-desktop}/bin/element-desktop --password-store=\"gnome-libsecret\" --user-data-dir=\"/home/${username}/.config/Element-${account_lower}\" %u";
-        icon = "element";
+        icon = "${element-desktop}/share/icons/hicolor/512x512/apps/element.png";
         categories = [ "Network" "Chat" "InstantMessaging" ];
       }
   ) accounts);

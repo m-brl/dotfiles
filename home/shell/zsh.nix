@@ -4,7 +4,6 @@
   programs.zsh = {
     enable = true;
 
-    oh-my-zsh.enable = true;
     syntaxHighlighting.enable = true;
 
     history = {
@@ -14,16 +13,35 @@
     };
 
     plugins = [
-      {
-        name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      }
     ];
 
     initContent = ''
-      [[ ! -f ${./p10k.zsh.config} ]] || source ${./p10k.zsh.config}
       eval "$(direnv hook zsh)"
     '';
+  };
+
+  programs = {
+    starship = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    atuin = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    eza = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    
+    ripgrep.enable = true;
+    bat.enable = true;
   };
 }
