@@ -1,0 +1,5 @@
+ClockService 1.0 ClockService.qml
+BatteryService 1.0 BatteryService.qml
+EmailService 1.0 EmailService.qml
+AudioService 1.0 AudioService.qml
+ClipboardService 1.0 ClipboardService.qml

@@ -1,0 +1,8 @@
+keys:
+  - &workstation age1dj3yd4z07j3n32ne0ucu3pq3aez364vc52th4f9p64z28mtmf5pqa9gm0j
+
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env)$
+    key_groups:
+    - age:
+      - *workstation

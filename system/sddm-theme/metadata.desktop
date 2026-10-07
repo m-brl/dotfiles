@@ -1,0 +1,10 @@
+[SddmGreeterTheme]
+Name=custom-theme
+Description=A custom theme
+Author=Mathieu
+Type=sddm-theme
+Version=1.0
+
+ConfigFile=theme.conf
+MainScript=Main.qml
+QtVersion=6

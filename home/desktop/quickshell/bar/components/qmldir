@@ -1,0 +1,5 @@
+IconButton 1.0 IconButton.qml
+StyledText 1.0 StyledText.qml
+RingComponent 1.0 RingComponent.qml
+SteppedSlider 1.0 SteppedSliderComponent.qml
+Tooltip 1.0 Tooltip.qml

@@ -1,0 +1,66 @@
+{
+  "placements": {
+    "widget-overflow-fixed-list": [],
+    "unified-extensions-area": [
+      "dontfuckwithpaste_raim_ist-browser-action",
+      "gdpr_cavi_au_dk-browser-action",
+      "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action",
+      "ublock0_raymondhill_net-browser-action",
+      "_3c078156-979c-498b-8990-85f7987dd929_-browser-action",
+      "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"
+    ],
+    "nav-bar": [
+      "back-button",
+      "forward-button",
+      "stop-reload-button",
+      "customizableui-special-spring7",
+      "vpn_proton_ch-browser-action",
+      "urlbar-container",
+      "78272b6fa58f4a1abaac99321d503a20_proton_me-browser-action",
+      "customizableui-special-spring2",
+      "downloads-button",
+      "unified-extensions-button",
+      "reset-pbm-toolbar-button",
+      "vertical-spacer"
+    ],
+    "toolbar-menubar": [
+      "menubar-items"
+    ],
+    "TabsToolbar": [
+      "tabbrowser-tabs",
+      "new-tab-button",
+      "customizableui-special-spring1",
+      "alltabs-button",
+      "ai-window-toggle"
+    ],
+    "vertical-tabs": [],
+    "PersonalToolbar": [
+      "personal-bookmarks"
+    ]
+  },
+  "seen": [
+    "downloads-button",
+    "unified-extensions-button",
+    "vpn_proton_ch-browser-action",
+    "78272b6fa58f4a1abaac99321d503a20_proton_me-browser-action",
+    "reset-pbm-toolbar-button",
+    "dontfuckwithpaste_raim_ist-browser-action",
+    "gdpr_cavi_au_dk-browser-action",
+    "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action",
+    "ublock0_raymondhill_net-browser-action",
+    "_3c078156-979c-498b-8990-85f7987dd929_-browser-action",
+    "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action",
+    "developer-button",
+    "screenshot-button"
+  ],
+  "dirtyAreaCache": [
+    "nav-bar",
+    "unified-extensions-area",
+    "TabsToolbar",
+    "vertical-tabs",
+    "toolbar-menubar",
+    "PersonalToolbar"
+  ],
+  "currentVersion": 26,
+  "newElementCount": 7
+}

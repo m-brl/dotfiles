@@ -1,0 +1,10 @@
+BatteryModule 1.0 BatteryModule.qml
+SoundModule 1.0 SoundModule.qml
+NetworkModule 1.0 NetworkModule.qml
+BluetoothModule 1.0 BluetoothModule.qml
+ClockModule 1.0 ClockModule.qml
+HyprlandWSModule 1.0 HyprlandWSModule.qml
+PlayerModule 1.0 PlayerModule.qml
+AnalogClockModule 1.0 AnalogClockModule.qml
+SysTrayModule 1.0 SysTrayModule.qml
+EmailModule 1.0 EmailModule.qml

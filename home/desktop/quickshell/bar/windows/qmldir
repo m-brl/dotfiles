@@ -1,0 +1,5 @@
+ClockWindow 1.0 ClockWindow.qml
+NetworkWindow 1.0 NetworkWindow.qml
+BatteryWindow 1.0 BatteryWindow.qml
+AudioWindow 1.0 AudioWindow.qml
+ClipboardWindow 1.0 ClipboardWindow.qml
