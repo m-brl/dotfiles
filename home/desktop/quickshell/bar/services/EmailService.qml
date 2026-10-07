@@ -14,7 +14,6 @@ Item {
         stdout: SplitParser {
             onRead: data => {
                 root.nbEmail = parseInt(data.trim(), 10) || 0
-                console.log(root.nbEmail)
             }
         }
     }

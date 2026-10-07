@@ -18,15 +18,12 @@ Item {
         return "󰂱"
     }
 
-    Rectangle {
-        anchors.fill: parent
-        color: "transparent"
-        Text {
-            anchors.centerIn: parent
-            font.family: "JetBrainsMono Nerd Font"
-            font.pixelSize: 14
-            color: Theme.text
-            text: root.bluetoothIcon
-        }
+
+    Text {
+        anchors.centerIn: parent
+        font.family: "JetBrainsMono Nerd Font"
+        font.pixelSize: 14
+        color: Theme.text
+        text: root.bluetoothIcon
     }
 }

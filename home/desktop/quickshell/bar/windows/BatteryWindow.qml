@@ -9,7 +9,7 @@ import Quickshell.Wayland
 
 import "../constants"
 import "../services"
-import "../components"
+import "../utils.js" as Utils
 
 PopupWindow {
     id: root
@@ -18,7 +18,7 @@ PopupWindow {
 
     visible: false
     color: "transparent"
-    width: 400
+    width: 410
     height: 500
 
     function toggle() {
@@ -41,6 +41,17 @@ PopupWindow {
         root.batteryService.battery.percentage
     }
 
+    readonly property string timeRemainingText: {
+        var battery = root.batteryService.battery
+        if (!battery) return ""
+
+        if (battery.state === UPowerDeviceState.Charging && battery.timeToFull > 0)
+            return Utils.formatDuration(battery.timeToFull) + " until full"
+        if (battery.state === UPowerDeviceState.Discharging && battery.timeToEmpty > 0)
+            return Utils.formatDuration(battery.timeToEmpty) + " remaining"
+        return ""
+    }
+
     Behavior on animatedValue {
         NumberAnimation {
             duration: 1200
@@ -58,44 +69,22 @@ PopupWindow {
     }
 
 
-    Rectangle {
-        id: background
+    Item {
         anchors.fill: parent
-        radius: 15
-        color: Theme.base0
-    }
-
-    Rectangle {
-        id: infoBox
-        anchors.right: parent.right
-        anchors.rightMargin: 10
         anchors.topMargin: 10
-        anchors.top: parent.top
-        width: infoIcon.implicitWidth
-        height: width
-        color: "transparent"
 
-        Text {
-            id: infoIcon
-            anchors.centerIn: parent
-            font.family: "JetBrainsMono Nerd Font"
-            font.pixelSize: 24
-            color: Theme.text
-
-            text: "󰋽"
+        Rectangle {
+            id: background
+            anchors.fill: parent
+            radius: 15
+            color: Theme.base0
         }
 
         MouseArea {
-            id: infoBoxMA
-            anchors.fill: parent
-            hoverEnabled: true
-        }
-    }
-
-    MouseArea {
-        anchors.fill: background
-        onClicked: {
-            root.toggle()
+            anchors.fill: background
+            onClicked: {
+                root.toggle()
+            }
         }
     }
 
@@ -173,6 +162,82 @@ PopupWindow {
                     font.pixelSize: 18
                     font.family: "JetBrainsMono Nerd Font"
                     color: Theme.text
+                }
+                Text {
+                    id: timeRemainingLabel
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    visible: root.timeRemainingText.length > 0
+
+                    text: root.timeRemainingText
+                    font.pixelSize: 13
+                    font.family: "JetBrainsMono Nerd Font"
+                    color: Theme.text
+                    opacity: 0.7
+                }
+            }
+        }
+
+        Rectangle { // stats
+            Layout.preferredHeight: 60
+            Layout.fillWidth: true
+            Layout.leftMargin: 25
+            Layout.rightMargin: 25
+            color: "transparent"
+
+            RowLayout {
+                anchors.fill: parent
+                spacing: 12
+
+                Repeater {
+                    model: [
+                        {
+                            icon: "♥",
+                            label: "Health",
+                            value: root.batteryService.battery.healthSupported
+                                ? Math.round(root.batteryService.battery.healthPercentage) + "%"
+                                : "N/A"
+                        },
+                        {
+                            icon: "⚡",
+                            label: "Rate",
+                            value: Math.abs(root.batteryService.battery.changeRate).toFixed(1) + "W"
+                        },
+                        {
+                            icon: "↻",
+                            label: "Cycles",
+                            value: String(root.batteryService.chargeCycles)
+                        }
+                    ]
+
+                    Rectangle {
+                        required property var modelData
+
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        radius: 15
+                        color: Theme.base3
+
+                        Column {
+                            anchors.centerIn: parent
+                            spacing: 2
+
+                            Text {
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                font.family: "JetBrainsMono Nerd Font"
+                                font.pixelSize: 16
+                                color: Theme.text
+                                text: modelData.icon + " " + modelData.value
+                            }
+                            Text {
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                font.family: "JetBrainsMono Nerd Font"
+                                font.pixelSize: 11
+                                color: Theme.text
+                                opacity: 0.7
+                                text: modelData.label.toUpperCase()
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -279,14 +344,5 @@ PopupWindow {
                 }
             }
         }
-    }
-
-    BatteryInfoModal {
-        batteryService: root.batteryService
-        anchors.top: infoBox.bottom
-        anchors.right: infoBox.left
-        width: 200
-        height: 200
-        visible: infoBoxMA.containsMouse
     }
 }

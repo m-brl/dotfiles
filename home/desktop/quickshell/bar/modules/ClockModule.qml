@@ -8,6 +8,7 @@ import "../services"
 
 Item {
     id: root
+    required property ClockService clockService
 
     property string temperature;
     property string weather;
@@ -42,9 +43,9 @@ Item {
         onTriggered: root.fetchWeather()
     }
 
-    Rectangle {
+    Item {
         anchors.fill: parent
-        color: "transparent"
+
         anchors.topMargin: 5
         anchors.bottomMargin: 5
         anchors.leftMargin: 10

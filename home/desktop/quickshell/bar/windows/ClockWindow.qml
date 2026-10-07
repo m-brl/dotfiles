@@ -67,7 +67,7 @@ PanelWindow {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 225
                 color: "transparent"
-                AnalogClock {
+                AnalogClockModule {
                     anchors.centerIn: parent
                     second: 0 //clockService.seconds
                     minute: clockService.minutes

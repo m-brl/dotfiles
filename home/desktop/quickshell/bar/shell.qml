@@ -36,9 +36,9 @@ ShellRoot {
         delegate: PanelWindow {
             id: panelWindow
 
-
             property var modelData
             screen: modelData
+
             anchors {
                 top: true
                 left: true
@@ -47,7 +47,7 @@ ShellRoot {
             height: 60
             color: "transparent"
 
-            Item {
+            Item { // full bar
                 anchors.fill: parent
                 anchors.topMargin: 10
                 anchors.leftMargin: 10
@@ -59,27 +59,15 @@ ShellRoot {
 
                     Rectangle {
                         Layout.fillHeight: true
-                        Layout.preferredWidth: hyprlandWS.implicitWidth + 20
+                        Layout.preferredWidth: hyprlandWSModule.implicitWidth + 20
                         color: Theme.base0
-                        radius: 15
+                        radius: 5
 
-                        HyprlandWS {
-                            id: hyprlandWS
+                        HyprlandWSModule {
+                            id: hyprlandWSModule
                             anchors.fill: parent
                         }
                     }
-
-                    /*Rectangle {
-                        Layout.fillHeight: true
-                        Layout.preferredWidth: hyprlandWS.implicitWidth + 20
-                        color: Theme.base0
-                        radius: 15
-
-                        HyprlandMode {
-                            id: hyprlandMode
-                            anchors.fill: parent
-                        }
-                    }*/
                 }
 
                 RowLayout { // mid
@@ -90,10 +78,10 @@ ShellRoot {
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter
                         Layout.preferredWidth: 300
-                        color: "#2e3440"
-                        radius: 15
+                        color: Theme.base0
+                        radius: 5
 
-                        Player {
+                        PlayerModule {
 
                         }
                     }
@@ -102,19 +90,20 @@ ShellRoot {
                         Layout.alignment: Qt.AlignHCenter
                         Layout.preferredWidth: 300
                         color: Theme.base0
-                        radius: 15
+                        radius: 5
 
-                        Clock {
+                        ClockModule {
                             anchors.fill: parent
+                            clockService: clockServiceBackend
                         }
                     }
                 }
 
-                Rectangle {
+                Rectangle { // right
                     anchors.right: parent.right
                     height: parent.height
                     color: Theme.base0
-                    radius: 15
+                    radius: 5
                     width: rightLayout.implicitWidth + 20
 
                     RowLayout { // right
@@ -130,7 +119,7 @@ ShellRoot {
                         Rectangle {
                             Layout.preferredWidth: 70
                             Layout.fillHeight: true
-                            radius: 15
+                            radius: 5
                             color: Theme.primary
 
                             EmailModule {
@@ -142,9 +131,9 @@ ShellRoot {
                         Rectangle { // Network
                             Layout.preferredWidth: 70
                             Layout.fillHeight: true
-                            radius: 15
+                            radius: 5
                             color: Theme.primary
-                            Network {
+                            NetworkModule {
                                 anchors.fill: parent
                             }
                         }
@@ -152,9 +141,9 @@ ShellRoot {
                         Rectangle { // Bluetooth
                             Layout.preferredWidth: 70
                             Layout.fillHeight: true
-                            radius: 15
+                            radius: 5
                             color: Theme.primary
-                            Bluetooth {
+                            BluetoothModule {
                                 anchors.fill: parent
                             }
                         }
@@ -164,9 +153,9 @@ ShellRoot {
                             id: sound
                             Layout.preferredWidth: 70
                             Layout.fillHeight: true
-                            radius: 15
+                            radius: 5
                             color: Theme.primary
-                            Sound {
+                            SoundModule {
                                 anchors.fill: parent
                             }
                         }
@@ -175,10 +164,10 @@ ShellRoot {
                             id: battery
                             Layout.preferredWidth: 70
                             Layout.fillHeight: true
-                            radius: 15
+                            radius: 5
                             color: Theme.primary
 
-                            Battery {
+                            BatteryModule {
                                 anchors.fill: parent
                                 batteryService: batteryServiceBackend
                             }
@@ -191,7 +180,6 @@ ShellRoot {
                                 anchor.item: battery
                                 anchor.edges: Edges.Bottom | Edges.Right
                                 anchor.gravity: Edges.Bottom | Edges.Left
-                                anchor.margins.top: 11
                             }
 
                             MouseArea {
