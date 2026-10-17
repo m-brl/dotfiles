@@ -55,7 +55,6 @@ in
     };
 
     pcscd.enable = true;
-    flatpak.enable = true;
 
     gnome.gnome-keyring.enable = lib.mkForce false;
 
@@ -100,10 +99,6 @@ in
 
     tailscale = {
       enable = true;
-    };
-
-    qbittorrent = {
-      enable = false;
     };
 
     cron = {

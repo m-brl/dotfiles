@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, osConfig, pkgs, slib, ... }:
 
 {
   imports = [
@@ -24,8 +24,9 @@
 
     gh = {
       enable = true;
-      gitCredentialHelper = {
-        enable = true;
+      package = slib.wrapSecrets {
+        pkg = pkgs.gh;
+        secrets.GH_TOKEN = osConfig.sops.secrets."GH_TOKEN".path;
       };
     };
 
@@ -35,6 +36,10 @@
 
     claude-code = {
       enable = true;
+      package = slib.wrapSecrets {
+        pkg = pkgs.claude-code;
+        secrets.CLAUDE_CODE_OAUTH_TOKEN = osConfig.sops.secrets."CLAUDE_CODE_OAUTH_TOKEN".path;
+      };
     };
 
     password-store = {

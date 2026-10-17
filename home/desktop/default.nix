@@ -2,29 +2,35 @@
 
 {
   imports = [
-    ./hyprland.nix ./waybar.nix ./swaync.nix ./quickshell.nix
+    ./hyprland.nix ./swaync.nix ./quickshell.nix
   ];
 
   services.awww = {
     enable = true;
   };
+
   systemd.user.services.awww-wallpaper = {
     Unit = {
       Description = "Define awww wallpaper";
       After = [ "awww.service" ];
       Requires = [ "awww.service" ];
-      PartOf = [ "graphical-session.target" ];
+      PartOf = [ "awww.service" ];
     };
 
     Service = {
       Type = "oneshot";
+      RemainAfterExit = true;
       ExecStartPre = "${pkgs.bash}/bin/bash -c 'until ${lib.getExe pkgs.awww} query; do sleep 0.2; done'";
       ExecStart = "${lib.getExe pkgs.awww} img ${inputs.image-collection}/images/Firewatch-pencil.png";
     };
 
-    Install.WantedBy = [ "graphical-session.target" ];
+    Install.WantedBy = [ "awww.service" ];
   };
 
+  services.cliphist = {
+    enable = true;
+    allowImages = true;
+  };
 
   programs.hyprlock = {
     enable = true;

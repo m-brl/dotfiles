@@ -1,5 +1,11 @@
-{ lib, config, pkgs, inputs, ... }:
+{ lib, config, osConfig, pkgs, inputs, slib, ... }:
 
+let
+  claude-agent-acp-wrapper = slib.wrapSecrets {
+    pkg = pkgs.claude-agent-acp;
+    secrets.CLAUDE_CODE_OAUTH_TOKEN = osConfig.sops.secrets."CLAUDE_CODE_OAUTH_TOKEN".path;
+  };
+in
 {
   imports = [
     inputs.nixvim.homeModules.nixvim
@@ -14,7 +20,7 @@
 
     extraPackages = with pkgs; [
       ruff clang-tools alejandra kdePackages.qtdeclarative
-      claude-agent-acp
+      claude-agent-acp-wrapper
       cargo rustc rust-analyzer clippy rustfmt
     ];
 

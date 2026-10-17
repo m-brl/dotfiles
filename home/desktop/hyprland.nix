@@ -1,16 +1,6 @@
 { config, pkgs, inputs, ... }:
 
 {
-  #programs.niri = {
-  #  settings = {
-  #    prefer-no-csd = true;
-
-  #    binds = with config.lib.niri.actions; {
-  #      "Mod+Return".action = spawn "kitty";
-  #    };
-  #  };
-  #};
-
   wayland.windowManager.hyprland = {
     enable = true;
     configType = "hyprlang";
@@ -29,10 +19,6 @@
 
       monitor = [
         "eDP-1, 1920x1200@60.0, 0x0, 1.0"
-      ];
-
-      exec-once = [
-        "wl-paste --watch cliphist store"
       ];
 
       env = [
@@ -123,8 +109,6 @@
           vibrancy = 0.1696;
         };
       };
-
-
 
       animations = {
         enabled = "yes";

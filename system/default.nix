@@ -1,6 +1,11 @@
 { config, pkgs, inputs, ... }:
 
+let
+  slib = import ../lib { inherit pkgs; };
+in
 {
+  _module.args.slib = slib;
+
   imports = [
     ./stylix.nix
     ./boot.nix
@@ -31,7 +36,7 @@
     useUserPackages = true;
     backupFileExtension = "nixbak";
     users.mathieu = import ../home;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs slib; };
   };
   
   system.stateVersion = "25.11";
@@ -43,10 +48,12 @@
   sops = {
     defaultSopsFile = ../secrets/secrets.json;
     defaultSopsFormat = "json";
-    age.keyFile = "/var/lib/sops-nix/keys.txt";
+    age.keyFile = "/persist/var/lib/sops-nix/keys.txt";
 
     secrets = {
       "mathieu-password".neededForUsers = true;
+      "CLAUDE_CODE_OAUTH_TOKEN" = { owner = "mathieu"; mode = "0400"; };
+      "GH_TOKEN" = { owner = "mathieu"; mode = "0400"; };
     };
   };
 
@@ -57,7 +64,7 @@
 
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "nvidia";
-    GDM_BACKEND = "nvidia-drm";
+    GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     __NV_PRIME_RENDER_OFFLOAD = "1";
     NVD_BACKEND = "direct";

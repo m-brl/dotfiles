@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, osConfig, config, pkgs, ... }:
 
 let
     openTicket = pkgs.writeShellScriptBin "ticket" ''

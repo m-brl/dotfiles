@@ -16,23 +16,35 @@ in
   home.username = "mathieu";
   home.homeDirectory = "/home/mathieu";
   home.stateVersion = "25.11";
-  
-  xdg.mimeApps = {
-    enable = true;
 
-    defaultApplications = {
-      "text/html" = [ "librewolf.desktop" ];
-      "x-scheme-handler/http" = [ "librewolf.desktop" ];
-      "x-scheme-handler/https" = [ "librewolf.desktop" ];
-      "x-scheme-handler/about" = [ "librewolf.desktop" ];
-      "x-scheme-handler/unknown" = [ "librewolf.desktop" ];
-      "x-scheme-handler/io.element.desktop" = [ "element-router.desktop" ];
-      "x-scheme-handler/element" = [ "element-router.desktop" ];
+  xdg = {
+    mimeApps = {
+      enable = true;
+
+      defaultApplications = {
+        "text/html" = [ "librewolf.desktop" ];
+        "x-scheme-handler/http" = [ "librewolf.desktop" ];
+        "x-scheme-handler/https" = [ "librewolf.desktop" ];
+        "x-scheme-handler/about" = [ "librewolf.desktop" ];
+        "x-scheme-handler/unknown" = [ "librewolf.desktop" ];
+        "x-scheme-handler/io.element.desktop" = [ "element-router.desktop" ];
+        "x-scheme-handler/element" = [ "element-router.desktop" ];
+      };
+    };
+
+    terminal-exec = {
+      enable = true;
+      settings = {
+        default = [
+          "kitty.desktop"
+        ];
+      };
     };
   };
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    TERMINAL = "kitty";
   };
 
   programs.home-manager.enable = true;
