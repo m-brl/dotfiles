@@ -22,7 +22,6 @@ in
 
   nixpkgs = {
     config.allowUnfree = true;
-    config.allowUnfreePredicate = _: true;
     overlays = [
       inputs.nix-openclaw.overlays.default
     ];
@@ -59,7 +58,7 @@ in
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "root" "mathieu" ];
+    trusted-users = [ "root" ];
   };
 
   environment.sessionVariables = {
@@ -69,6 +68,8 @@ in
     __NV_PRIME_RENDER_OFFLOAD = "1";
     NVD_BACKEND = "direct";
     WLR_NO_HARDWARE_CURSORS = "1";
+
+    CLAUDE_CONFIG_DIR = "${config.users.users.mathieu.home}/.claude";
   };
 
   environment.systemPackages = with pkgs; [
@@ -87,7 +88,6 @@ in
     yubikey-manager yubikey-personalization
     sbctl
     swtpm
-    cron
     wireguard-tools libnatpmp
   ];
 

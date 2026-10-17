@@ -42,7 +42,7 @@ Item {
     Process {
         id: tlpSet
         property string profile: ""
-        command: ["pkexec", "tlp", profile]
+        command: ["tlpctl", profile]
         onExited: (exitCode) => {
             if (exitCode === 0) {
                 root.profile = root.pendingProfile

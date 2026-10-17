@@ -23,7 +23,8 @@
       "/var/lib/sddm"
       "/var/lib/cups"
       "/var/lib/libvirt"
-      "/var/lib/docker/volumes"
+      "/var/lib/containers"
+      "/var/lib/tor"
     ];
 
     files = [
@@ -47,6 +48,7 @@
         "Pictures"
         "Videos"
 
+        ".claude"
         ".librewolf"
 
         ".config/vesktop"

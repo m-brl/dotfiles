@@ -80,6 +80,8 @@ let
     "browser.uiCustomization.state" = builtins.toJSON (builtins.fromJSON (builtins.readFile ./layout.json));
   };
 
+  addons = inputs.firefox-addons.packages.${pkgs.system};
+
 in
   {
   imports = [
@@ -92,59 +94,19 @@ in
   programs.librewolf = {
     enable = true;
 
+    globalExtensions = [
+      { package = addons.ublock-origin; settings = { private_browsing = true; default_area = "menupanel"; }; }
+      { package = addons.proton-pass; settings = { private_browsing = true; default_area = "navbar"; }; }
+      { package = addons.proton-vpn; settings = { private_browsing = true; default_area = "navbar"; }; }
+      { package = addons.sidebery; settings = { private_browsing = true; default_area = "menupanel"; }; }
+
+      { package = addons.don-t-fuck-with-paste; }
+      { package = addons.consent-o-matic; }
+      { package = addons.vimium; }
+      { package = addons.violentmonkey; }
+    ];
+
     policies = {
-      ExtensionSettings = {
-        "uBlock0@raymondhill.net" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-          installation_mode = "force_installed";
-          private_browsing = true;
-          default_area = "menupanel";
-        };
-
-        "DontFuckWithPaste@raim.ist" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/don-t-fuck-with-paste/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "menupanel";
-        };
-
-        "gdpr@cavi.au.dk" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/consent-o-matic/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "menupanel";
-        };
-
-        "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium-ff/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "menupanel";
-        };
-
-        "{aecec67f-0d10-4fa7-b7c7-609a2db280cf}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/violentmonkey/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "menupanel";
-        };
-
-        "{3c078156-979c-498b-8990-85f7987dd929}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/sidebery/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "menupanel";
-        };
-
-        "78272b6fa58f4a1abaac99321d503a20@proton.me" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/proton-pass/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "navbar";
-        };
-
-        "vpn@proton.ch" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/proton-vpn-firefox-extension/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "navbar";
-          private_browsing = true;
-        };
-      };
-
       Cookies = {
         Allow = [
           "https://web.whatsapp.com"

@@ -2,10 +2,10 @@
 
 {
   imports = [
-    ./polkit/tlp.nix
     ./polkit/fan.nix
   ];
 
+  security.sudo.execWheelOnly = true;
   security.rtkit.enable = true;
   security.polkit = {
     enable = true;
@@ -25,8 +25,7 @@
         }
 
         if (subject.isInGroup("wheel")) {
-          if (action.id == "org.mathieu.tlp.run" ||
-              action.id == "org.mathieu.fan.control" ||
+          if (action.id == "org.mathieu.fan.control" ||
               action.id == "net.reactivated.fprint.device.enroll" ||
               action.id == "org.debian.pcsc-lite.access_card" ||
               action.id == "org.debian.pcsc-lite.access_pcsc") {

@@ -3,8 +3,7 @@
 {
   imports = [
     ./librewolf
-    ./firefox.nix
-    #    ./openclaw.nix
+#    ./openclaw.nix
     ./element.nix
 
     inputs.nix-index-database.homeModules.nix-index

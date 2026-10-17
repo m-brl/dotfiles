@@ -27,8 +27,6 @@ in
 
     gvfs.enable = true;
 
-    protonmail-bridge.enable = true;
-
     tor = {
       enable = true;
       settings = {
@@ -109,6 +107,7 @@ in
 
     openssh = {
       enable = true;
+      openFirewall = false;
       settings = {
         PermitRootLogin = "no";
         PasswordAuthentication = false;

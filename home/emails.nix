@@ -1,6 +1,7 @@
 { lib, config, pkgs, inputs, ... }:
 
 let
+  isync = pkgs.isync.override { withCyrusSaslXoauth2 = true; };
   secretData = builtins.fromJSON
     (builtins.readFile "${inputs.secrets}/email.json");
 in
@@ -48,7 +49,7 @@ in
         tls.certificatesFile = "${config.home.homeDirectory}/.config/protonmail/bridge-v3/cert.pem";
       };
 
-      passwordCommand = "${lib.getExe pkgs.pass} show email/proton";
+      passwordCommand = "${lib.getExe pkgs.pass-wayland} show email/proton";
 
       mbsync = {
         enable = true;
@@ -63,7 +64,7 @@ in
       imapnotify = {
         enable = true;
         boxes = [ "Inbox" ];
-        onNotify = "${lib.getExe pkgs.isync} proton";
+        onNotify = "${lib.getExe isync} proton";
         onNotifyPost = "${lib.getExe pkgs.notmuch} new";
       };
 
@@ -143,8 +144,9 @@ in
       imapnotify = {
         enable = true;
         boxes = [ "Inbox" ];
-        onNotify = "${lib.getExe pkgs.isync} epitech";
+        onNotify = "${lib.getExe isync} epitech";
         onNotifyPost = "${lib.getExe pkgs.notmuch} new";
+        extraConfig.xoauth2 = true;
       };
 
       neomutt = {
@@ -177,7 +179,7 @@ in
 
   programs.mbsync = {
     enable = true;
-    package = pkgs.isync.override { withCyrusSaslXoauth2 = true; };
+    package = isync;
   };
   programs.msmtp.enable = true;
   programs.neomutt = {
@@ -212,8 +214,8 @@ in
 
   services.mbsync = {
     enable = true;
-    package = pkgs.isync.override { withCyrusSaslXoauth2 = true; };
-    frequency = "*:0/5";
+    package = isync;
+    frequency = "*:0/1";
     postExec = "${lib.getExe pkgs.notmuch} new";
   };
 

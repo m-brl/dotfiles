@@ -16,7 +16,6 @@
       "video"
       "audio"
       "libvirtd"
-      "docker"
       "input"
       "lpadmin"
     ];

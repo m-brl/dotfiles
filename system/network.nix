@@ -10,8 +10,6 @@
 
     modemmanager = {
       enable = true;
-      fccUnlockScripts = [
-      ];
     };
 
     firewall = {
