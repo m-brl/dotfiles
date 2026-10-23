@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ ... }:
 
 {
   environment.persistence."/persist" = {
@@ -59,6 +59,7 @@
         ".local/share/direnv"
         ".local/share/keyrings"
         ".local/share/protonmail"
+        ".local/share/newsboat"
         ".local/share/pki"
         ".local/share/Steam"
         ".local/share/zoxide"

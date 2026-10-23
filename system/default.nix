@@ -8,6 +8,7 @@ in
 
   imports = [
     ./stylix.nix
+    ./sops.nix
     ./boot.nix
     ./hardware.nix
     ./hardware-configuration.nix
@@ -44,18 +45,6 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "us";
 
-  sops = {
-    defaultSopsFile = ../secrets/secrets.json;
-    defaultSopsFormat = "json";
-    age.keyFile = "/persist/var/lib/sops-nix/keys.txt";
-
-    secrets = {
-      "mathieu-password".neededForUsers = true;
-      "CLAUDE_CODE_OAUTH_TOKEN" = { owner = "mathieu"; mode = "0400"; };
-      "GH_TOKEN" = { owner = "mathieu"; mode = "0400"; };
-    };
-  };
-
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "root" ];
@@ -88,6 +77,7 @@ in
     yubikey-manager yubikey-personalization
     sbctl
     swtpm
+    sops
     wireguard-tools libnatpmp
   ];
 

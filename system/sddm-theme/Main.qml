@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Effects
 
 import "./constants"
 
@@ -8,244 +9,290 @@ import "./services"
 
 Rectangle {
     id: container
-    color: config.color
+    color: Theme.background
 
     ClockService {
         id: clockService
     }
 
     Image {
-        source: config.background
         anchors.fill: parent
+        source: "/home/mathieu/Pictures/firewatch.jpg";
+        fillMode: Image.PreserveAspectFit
     }
 
     Rectangle {
         anchors.fill: parent
-        anchors.centerIn: parent
-        color: "transparent"
+        color: Theme.accent
+    }
 
-        RowLayout {
-            anchors.fill: parent
+    RowLayout {
+        anchors.fill: parent
 
-            Rectangle { // left part
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+        Rectangle { // left part
+            Layout.preferredWidth: 1000
+            Layout.fillHeight: true
+            color: "transparent"
+
+            Rectangle {
+                anchors.right: parent.right
+                anchors.rightMargin: 100
+                anchors.verticalCenter: parent.verticalCenter
+
+                width: 600
+                height: 150
                 color: "transparent"
 
                 Rectangle {
                     anchors.right: parent.right
-                    anchors.rightMargin: 100
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
 
-                    width: 600
-                    height: 150
-                    color: "transparent"
+                    width: 10
+                    color: Theme.base00
+                }
 
-                    Rectangle {
-                        anchors.right: parent.right
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
+                Text {
+                    anchors.top: parent.top
 
-                        width: 10
-                        color: Macchiato.text
-                    }
+                    color: Theme.text
+                    font.pixelSize: 70
+                    font.family: Theme.sansFamily
+                    font.bold: true
 
-                    Text {
-                        anchors.top: parent.top
+                    text: String(clockService.hours).padStart(2, "0") + ":" + 
+                    String(clockService.minutes).padStart(2, "0") + ":" +
+                    String(clockService.seconds).padStart(2, "0") + " " + clockService.amPm
+                }
 
-                        color: Macchiato.text
-                        font.pixelSize: 70
-                        font.family: "JetBrainsMono Nerd Font"
-                        font.bold: true
+                Text {
+                    anchors.bottom: parent.bottom
 
-                        text: String(clockService.hours).padStart(2, "0") + ":" + 
-                            String(clockService.minutes).padStart(2, "0") + ":" +
-                            String(clockService.seconds).padStart(2, "0") + " " + clockService.amPm
-                    }
+                    color: Theme.text
+                    font.pixelSize: 50
+                    font.family: Theme.sansFamily
 
-                    Text {
-                        anchors.bottom: parent.bottom
-
-                        color: Macchiato.text
-                        font.pixelSize: 50
-                        font.family: "JetBrainsMono Nerd Font"
-
-                        text: clockService.dayOfWeek + ", " + clockService.monthName + " " + clockService.day;
-                    }
+                    text: clockService.dayOfWeek + ", " + clockService.monthName + " " + clockService.day;
                 }
             }
+        }
 
-            Rectangle { // right part
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                color: "transparent"
+        Rectangle { // right part
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            color: "transparent"
 
-                Rectangle {
+            Rectangle {
+                anchors.left: parent.left
+                anchors.leftMargin: 100
+                anchors.verticalCenter: parent.verticalCenter
+
+                Item {
                     anchors.left: parent.left
-                    anchors.leftMargin: 100
                     anchors.verticalCenter: parent.verticalCenter
+                    width: 40
+                    height: 40
 
-                    width: 300
-                    height: 500
-
-                    radius: 15
-                    color: Qt.alpha(Macchiato.base, 0.5)
-
-                    ColumnLayout {
+                    Text {
+                        anchors.centerIn: parent
+                        text: "󰁍"
+                        color: leftButton.containsMouse ? Qt.darker(Theme.text, 1.5) : Theme.text
+                        font.pixelSize: 32
+                        font.family: Theme.monoFamily
+                    }
+                    MouseArea {
+                        id: leftButton
+                        hoverEnabled: true
                         anchors.fill: parent
-                        anchors.leftMargin: 30
-                        anchors.rightMargin: 30
-                        anchors.topMargin: 100
-                        anchors.bottomMargin: 100
-                        spacing: 10
+                        onClicked: userList.incrementCurrentIndex()
+                    }
+                }
 
-                        Rectangle { // user
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: 60
-                            color: "transparent"
+                Item {
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 40
+                    height: 40
 
-                            Rectangle { // bottom border
-                                height: 2
-                                anchors.bottom: parent.bottom
-                                anchors.left: parent.left
-                                anchors.right: parent.right
+                    Text {
+                        anchors.centerIn: parent
+                        text: "󰁔"
+                        color: rightButton.containsMouse ? Qt.darker(Theme.text, 1.5) : Theme.text
+                        font.pixelSize: 32
+                        font.family: Theme.monoFamily
+                    }
+                    MouseArea {
+                        id: rightButton
+                        hoverEnabled: true
+                        anchors.fill: parent
+                        onClicked: userList.incrementCurrentIndex()
+                    }
+                }
 
-                                color: Qt.alpha(Macchiato.base, 0.8)
-                            }
+                width: 300
+                height: 500
 
-                            Rectangle { // icon
-                                id: userIcon
-                                anchors.top: parent.top
-                                anchors.left: parent.left
-                                height: 60
-                                width: 60
-                                color: "transparent"
+                radius: 5
+                color: Theme.surface
 
-                                Text {
-                                    anchors.centerIn: parent
+                ColumnLayout {
+                    anchors.fill: parent
+                    anchors.leftMargin: 30
+                    anchors.rightMargin: 30
+                    anchors.topMargin: 40
+                    anchors.bottomMargin: 40
+                    spacing: 10
 
-                                    color: Macchiato.text
-                                    font.pixelSize: 42
-                                    text: ""
-                                }
-                            }
+                    ListView {
+                        id: userList
+                        model: userModel
+                        orientation: ListView.Horizontal
+                        currentIndex: userModel.lastIndex
 
-                            Text { // label
-                                anchors.left: userIcon.right
-                                anchors.top: parent.top
-                                anchors.right: parent.right
-                                height: 20
+                        Layout.preferredWidth: 200
+                        Layout.preferredHeight: 300
+                        Layout.alignment: Qt.AlignHCenter
 
-                                color: Macchiato.text
-                                font.pixelSize: 14
-                                text: "User"
-                            }
+                        delegate: Rectangle {
+                            id: user
+                            required property string name
+                            required property string icon
+                            width: 200
+                            height: 300
+                            radius: 5
+                            color: Theme.surface2
 
-                            TextField { // input
-                                id: username
-
-                                anchors.left: userIcon.right
-                                anchors.bottom: parent.bottom
-                                anchors.right: parent.right
-                                height: 40
-
-                                color: Macchiato.text
-                                placeholderText: "User"
-                                placeholderTextColor: Qt.alpha(Macchiato.text, 0.2)
-                                text: userModel.lastUser
-                                font.pixelSize: 18
-
-                                padding: 0
-                                background: null
-                            }
-                        }
-
-                        Rectangle { // password
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: 60
-                            color: "transparent"
-
-                            Rectangle { // bottom border
-                                height: 2
-                                anchors.bottom: parent.bottom
-                                anchors.left: parent.left
-                                anchors.right: parent.right
-
-                                color: Qt.alpha(Macchiato.base, 0.8)
-                            }
-
-                            Rectangle { // icon
-                                id: passwordIcon
-                                anchors.top: parent.top
-                                anchors.left: parent.left
-                                height: 60
-                                width: 60
-                                color: "transparent"
-
-                                Text {
-                                    anchors.centerIn: parent
-
-                                    color: Macchiato.text
-                                    font.pixelSize: 42
-                                    text: "󰌾"
-                                }
-                            }
-
-                            Text { // label
-                                anchors.left: passwordIcon.right
-                                anchors.top: parent.top
-                                anchors.right: parent.right
-                                height: 20
-
-                                color: Macchiato.text
-                                font.pixelSize: 14
-                                text: "Password"
-                            }
-
-                            TextField {
-                                id: password
-
-                                anchors.left: passwordIcon.right
-                                anchors.bottom: parent.bottom
-                                anchors.right: parent.right
-                                height: 40
-
-                                color: Macchiato.text
-                                placeholderText: "Password"
-                                placeholderTextColor: Qt.alpha(Macchiato.text, 0.2)
-                                echoMode: TextInput.Password
-                                font.pixelSize: 18
-
-                                padding: 0
-                                background: null
-
-                                onAccepted: {
-                                    sddm.login(username.text, password.text, sessionModel.lastIndex)
-                                }
-                            }
-                        }
-
-                        Rectangle {
-                            Layout.preferredHeight: 60
-                            Layout.fillWidth: true
-                            border.color: Macchiato.rosewater
-                            border.width: 2
-                            color: "transparent"
-                            radius: 15
-
-                            Text {
+                            Column {
                                 anchors.centerIn: parent
-                                color: Macchiato.rosewater
-                                font.family: "JetBrainsMono Nerd Font"
-                                font.pixelSize: 14
-                                font.bold: true
-                                text: "Connect"
-                            }
+                                spacing: 10
+                                width: parent.width - 40
 
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: sddm.login(username.text, password.text, sessionModel.lastIndex)
+                                Rectangle {
+                                    id: avatarContainer
+                                    width: 150
+                                    height: 150
+                                    radius: 10
+                                    color: Theme.base00
+
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    border.color: Theme.accent
+                                    border.width: 2
+
+                                    Image {
+                                        id: avatar
+                                        anchors.fill: parent
+                                        anchors.margins: 2
+                                        source: user.icon
+                                        fillMode: Image.PreserveAspectCrop
+                                        visible: false
+                                        mipmap: true
+                                        asynchronous: true
+                                        sourceSize: Qt.size(width * 5, height * 5)
+                                        layer.enabled: true
+                                    }
+
+                                    Rectangle {
+                                        id: mask
+                                        radius: 8
+                                        anchors.fill: avatar
+                                        visible: false
+                                        antialiasing: true
+                                        layer.enabled: true
+                                        layer.smooth: true
+                                        layer.textureSize: Qt.size(width * 5, height * 5)
+                                    }
+
+                                    MultiEffect {
+                                        anchors.fill: avatar
+                                        source: avatar
+                                        maskEnabled: true
+                                        maskSource: mask
+                                    }
+
+                                    Rectangle {
+                                        width: 150
+                                        height: 150
+                                        radius: 10
+                                        color: "transparent"
+                                        border.color: Theme.accent
+                                        border.width: 2
+                                    }
+                                }
+
+                                Text {
+                                    text: user.name
+                                    font.family: Theme.sansFamily
+                                    font.pixelSize: 32
+                                    font.bold: true
+                                    color: Theme.text
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    visible: false
+                                }
+
+                                TextField {
+                                    id: userInput
+
+                                    width: parent.width - 40
+
+                                    anchors.horizontalCenter: parent.horizontalCenter
+
+                                    color: Theme.text
+                                    placeholderText: "User"
+                                    placeholderTextColor: Qt.alpha(Theme.text, 0.2)
+                                    echoMode: TextInput.Normal
+                                    font.pixelSize: 32
+
+                                    padding: 0
+                                    background: null
+                                }
+
+                                TextField {
+                                    id: password
+
+                                    height: 40
+                                    width: parent.width - 40
+
+                                    anchors.horizontalCenter: parent.horizontalCenter
+
+                                    color: Theme.text
+                                    placeholderText: "Password"
+                                    placeholderTextColor: Qt.alpha(Theme.text, 0.2)
+                                    echoMode: TextInput.Password
+                                    font.pixelSize: 16
+
+                                    padding: 0
+                                    background: null
+
+                                    onAccepted: {
+                                        sddm.login(username.text, password.text, sessionModel.lastIndex)
+                                    }
+                                }
                             }
+                        }
+                    }
+
+                    Rectangle {
+                        Layout.preferredHeight: 40
+                        Layout.preferredWidth: 200
+                        Layout.alignment: Qt.AlignHCenter
+
+                        border.color: Theme.accent
+                        border.width: 2
+                        color: "transparent"
+                        radius: 5
+
+                        Text {
+                            anchors.centerIn: parent
+                            color: Theme.accent
+                            font.family: Theme.sansFamily
+                            font.pixelSize: 14
+                            font.bold: true
+                            text: "Connect"
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: sddm.login(username.text, password.text, sessionModel.lastIndex)
                         }
                     }
                 }

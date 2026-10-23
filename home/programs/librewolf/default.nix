@@ -1,13 +1,29 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 let
+  jail = inputs.jail-nix.lib.init pkgs;
+
+  librewolf-jailed =
+    jail "librewolf" config.programs.librewolf.finalPackage
+      (with jail.combinators; [
+        network
+        gui
+        gpu
+        pipewire
+
+        (readonly "/nix/store")
+        (readwrite (noescape "~/.librewolf"))
+        (readwrite (noescape "~/.cache/librewolf"))
+        (readwrite (noescape "~/Downloads"))
+      ]);
+
   commonSearch = {
-    default = "Startpage";
-    privateDefault = "Startpage";
+    default = "startpage";
+    privateDefault = "startpage";
     force = true;
 
     engines = {
-      "Startpage" = {
+      "startpage" = {
         name = "Startpage";
         urls = [{
           template = "https://www.startpage.com/sp/search";
@@ -16,7 +32,44 @@ let
           ];
         }];
         icon = "https://www.startpage.com/favicon.ico";
-        definedAliases = [ "@sp" ];
+        definedAliases = [ "@sp" "@startpage" ];
+      };
+
+      "google" = {
+        name = "Google";
+        urls = [{
+          template = "https://www.google.com/search";
+          params = [
+            { name = "q"; value = "{searchTerms}"; }
+          ];
+        }];
+        icon = "https://www.google.com/favicon.ico";
+        definedAliases = [ "@g" "@google" ];
+      };
+
+      "claude" = {
+        name = "Claude";
+        urls = [{
+          template = "https://claude.ai/new";
+          params = [
+            { name = "q"; value = "{searchTerms}"; }
+          ];
+        }];
+        icon = "https://claude.ai/favicon.ico";
+        definedAliases = [ "@cl" "@claude" ];
+      };
+
+      "google-ai" = {
+        name = "Google AI";
+        urls = [{
+          template = "https://www.google.com/search";
+          params = [
+            { name = "udm"; value = "50"; }
+            { name = "q"; value = "{searchTerms}"; }
+          ];
+        }];
+        icon = "https://www.google.com/favicon.ico";
+        definedAliases = [ "@gemini" ];
       };
 
       "nix-packages" = {
@@ -59,6 +112,32 @@ let
         definedAliases = [ "@hm" ];
       };
 
+      "youtube" = {
+        name = "YouTube";
+        urls = [{
+          template = "https://www.youtube.com/results";
+          params = [
+            { name = "search_query"; value = "{searchTerms}"; }
+          ];
+        }];
+
+        icon = "https://www.youtube.com/favicon.ico";
+        definedAliases = [ "@yt" "@youtube" ];
+      };
+
+      "x" = {
+        name = "X";
+        urls = [{
+          template = "https://x.com/search";
+          params = [
+            { name = "q"; value = "{searchTerms}"; }
+          ];
+        }];
+
+        icon = "https://x.com/favicon.ico";
+        definedAliases = [ "@x" ];
+      };
+
       bing.metaData.hidden = true;
       ddg.metaData.hidden = true;
       mojeek.metaData.hidden = true;
@@ -80,7 +159,7 @@ let
     "browser.uiCustomization.state" = builtins.toJSON (builtins.fromJSON (builtins.readFile ./layout.json));
   };
 
-  addons = inputs.firefox-addons.packages.${pkgs.system};
+  addons = inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system};
 
 in
   {
@@ -100,10 +179,10 @@ in
       { package = addons.proton-vpn; settings = { private_browsing = true; default_area = "navbar"; }; }
       { package = addons.sidebery; settings = { private_browsing = true; default_area = "menupanel"; }; }
 
-      { package = addons.don-t-fuck-with-paste; }
-      { package = addons.consent-o-matic; }
-      { package = addons.vimium; }
-      { package = addons.violentmonkey; }
+      { package = addons.don-t-fuck-with-paste; settings = { private_browsing = false; default_area = "menupanel"; }; }
+      { package = addons.consent-o-matic; settings = { private_browsing = false; default_area = "menupanel"; }; }
+      { package = addons.vimium; settings = { private_browsing = false; default_area = "menupanel"; }; }
+      { package = addons.violentmonkey; settings = { private_browsing = false; default_area = "menupanel"; }; }
     ];
 
     policies = {
@@ -136,11 +215,9 @@ in
 
     profiles = {
       mathieu-default = {
-        isDefault = true;
         id = 0;
-
+        isDefault = true;
         extensions.force = true;
-
         search = commonSearch;
         settings = commonSettings // {
           "privacy.resistFingerprinting" = true;
@@ -154,6 +231,8 @@ in
 
       mathieu-webgl = {
         id = 1;
+        isDefault = false;
+        extensions.force = true;
         search = commonSearch;
         settings = commonSettings // {
           "privacy.resistFingerprinting" = false;
@@ -167,4 +246,8 @@ in
       };
     };
   };
+
+  home.packages = [
+    (lib.hiPrio librewolf-jailed)
+  ];
 }

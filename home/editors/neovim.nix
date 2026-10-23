@@ -3,7 +3,7 @@
 let
   claude-agent-acp-wrapper = slib.wrapSecrets {
     pkg = pkgs.claude-agent-acp;
-    secrets.CLAUDE_CODE_OAUTH_TOKEN = osConfig.sops.secrets."CLAUDE_CODE_OAUTH_TOKEN".path;
+    secrets.CLAUDE_CODE_OAUTH_TOKEN = osConfig.sops.secrets."mathieu/CLAUDE_CODE_OAUTH_TOKEN".path;
   };
 in
 {

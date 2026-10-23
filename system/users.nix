@@ -7,7 +7,7 @@
     createHome = true;
     home = "/home/mathieu";
     shell = pkgs.zsh;
-    hashedPasswordFile = config.sops.secrets."mathieu-password".path;
+    hashedPasswordFile = config.sops.secrets."mathieu/password".path;
 
     extraGroups = [
       "wheel"

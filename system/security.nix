@@ -1,9 +1,18 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   imports = [
     ./polkit/fan.nix
   ];
+
+  nix-mineral = {
+    enable = true;
+    filesystems.normal = {
+      "/etc".enable = false;
+      "/var".enable = false;
+      "/home".enable = false;
+    };
+  };
 
   security.sudo.execWheelOnly = true;
   security.rtkit.enable = true;
@@ -36,10 +45,10 @@
     '';
   };
 
-  security.pam.u2f = {
-    enable = true;
+  security = {
+    pam = {
+      services.hyprlock = {};
+      services.sddm.gnupg.enable = true;
+    };
   };
-  security.pam.services.sudo.u2f.enable = true;
-  security.pam.services.hyprlock = {};
-  security.pam.services.hyprlock.u2f.enable = true;
 }

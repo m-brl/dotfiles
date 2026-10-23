@@ -5,6 +5,7 @@
     ./librewolf
 #    ./openclaw.nix
     ./element.nix
+    ./newsboat.nix
 
     inputs.nix-index-database.homeModules.nix-index
   ];
@@ -25,7 +26,7 @@
       enable = true;
       package = slib.wrapSecrets {
         pkg = pkgs.gh;
-        secrets.GH_TOKEN = osConfig.sops.secrets."GH_TOKEN".path;
+        secrets.GH_TOKEN = osConfig.sops.secrets."mathieu/GH_TOKEN".path;
       };
     };
 
@@ -37,7 +38,7 @@
       enable = true;
       package = slib.wrapSecrets {
         pkg = pkgs.claude-code;
-        secrets.CLAUDE_CODE_OAUTH_TOKEN = osConfig.sops.secrets."CLAUDE_CODE_OAUTH_TOKEN".path;
+        secrets.CLAUDE_CODE_OAUTH_TOKEN = osConfig.sops.secrets."mathieu/CLAUDE_CODE_OAUTH_TOKEN".path;
       };
     };
 
@@ -54,6 +55,5 @@
         };
       };
     };
-
   };
 }

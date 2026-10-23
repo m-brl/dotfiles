@@ -1,5 +1,23 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, slib, inputs, ... }:
 
+let
+  jail = inputs.jail-nix.lib.init pkgs;
+
+  vesktop-jailed =
+    jail "vesktop" pkgs.vesktop
+      (with jail.combinators; [
+        network
+        gui
+        gpu
+        pipewire
+
+        (dbus { talk = [ "org.freedesktop.portal.*" ]; })
+
+        (readwrite (noescape "~/.config/vesktop"))
+        (readwrite (noescape "~/.local/share/keyring-vesktop"))
+        (readwrite (noescape "~/Downloads"))
+      ]);
+in
 {
   imports = [
     ./desktop
@@ -80,7 +98,7 @@
     pavucontrol qpwgraph lsp-plugins ffmpeg gimp
 
     # Game
-    discord vesktop steam parsec-bin protonup-qt
+    (lib.hiPrio vesktop-jailed) vesktop steam parsec-bin protonup-qt
     wineWow64Packages.waylandFull
 
     # Tools

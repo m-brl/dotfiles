@@ -1,4 +1,1 @@
-singleton Latte 1.0 Latte.qml
-singleton Frappe 1.0 Frappe.qml
-singleton Macchiato 1.0 Macchiato.qml
-singleton Mocha 1.0 Mocha.qml
+singleton Theme 1.0 Theme.qml
