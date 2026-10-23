@@ -1,8 +1,10 @@
 keys:
-  - &workstation age1dj3yd4z07j3n32ne0ucu3pq3aez364vc52th4f9p64z28mtmf5pqa9gm0j
+  - &mathieu-workstation age1dj3yd4z07j3n32ne0ucu3pq3aez364vc52th4f9p64z28mtmf5pqa9gm0j
+  - &mathieu-wsl age1s0ythtg9k44zwvrz0zdrzurkqa9439gvt7svxqsa38gj2gek3g9qh6axlu
 
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env)$
     key_groups:
     - age:
-      - *workstation
+      - *mathieu-workstation
+      - *mathieu-wsl
