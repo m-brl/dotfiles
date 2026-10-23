@@ -18,6 +18,7 @@
       "/var/lib/tailscale"
       "/var/lib/vnstat"
       "/var/lib/systemd/timers"
+      "/var/lib/systemd/pstore"
       "/var/lib/fprint"
       "/var/lib/private"
       "/var/lib/sddm"

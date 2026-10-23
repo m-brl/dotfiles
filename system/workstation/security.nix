@@ -12,6 +12,12 @@
       "/var".enable = false;
       "/home".enable = false;
     };
+
+    settings.debug = {
+      quiet-boot = false;
+      panic-reboot = false;
+      efipstore = true;
+    };
   };
 
   security.sudo.execWheelOnly = true;

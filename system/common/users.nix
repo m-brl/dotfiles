@@ -9,15 +9,6 @@
     shell = pkgs.zsh;
     hashedPasswordFile = config.sops.secrets."mathieu/password".path;
 
-    extraGroups = [
-      "wheel"
-      "dialout"
-      "networkmanager"
-      "video"
-      "audio"
-      "libvirtd"
-      "input"
-      "lpadmin"
-    ];
+    extraGroups = [ "wheel" ];
   };
 }

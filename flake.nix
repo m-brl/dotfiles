@@ -41,21 +41,25 @@
 
     nix-openclaw.url = "github:openclaw/nix-openclaw";
     nix-openclaw.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.mathieu-workstation = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; }; 
-      modules = [
-        ./system
-        inputs.impermanence.nixosModules.impermanence
-        inputs.lanzaboote.nixosModules.lanzaboote
-        inputs.nix-mineral.nixosModules.nix-mineral
-        inputs.stylix.nixosModules.stylix
-        inputs.sops-nix.nixosModules.sops
-        inputs.home-manager.nixosModules.home-manager
-      ];
+  outputs = { self, nixpkgs, ... }@inputs:
+    let
+      mkHost = modules: nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          inputs.stylix.nixosModules.stylix
+          inputs.sops-nix.nixosModules.sops
+          inputs.home-manager.nixosModules.home-manager
+        ] ++ modules;
+      };
+    in
+    {
+      nixosConfigurations.mathieu-workstation = mkHost [ ./hosts/workstation ];
+      nixosConfigurations.mathieu-wsl = mkHost [ ./hosts/wsl ];
     };
-  };
 }

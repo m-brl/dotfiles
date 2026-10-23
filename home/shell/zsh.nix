@@ -43,6 +43,7 @@ in
     initContent = ''
       print "Welcome $(whoami)"
       print "You have \033[32m$(zellij list-sessions | wc -l)\033[0m zellij sessions running"
+    '' + lib.optionalString config.programs.notmuch.enable ''
       nb_mail=$(notmuch count tag:unread)
       if [ "$nb_mail" -eq 0 ]; then
         print "You have \033[32m$nb_mail\033[0m unread emails"

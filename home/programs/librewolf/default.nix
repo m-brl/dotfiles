@@ -11,10 +11,15 @@ let
         gpu
         pipewire
 
+        (add-runtime ''
+          ${pkgs.coreutils}/bin/mkdir -p ${config.home.homeDirectory}/.cache/librewolf
+          ${pkgs.coreutils}/bin/mkdir -p ${config.home.homeDirectory}/Downloads
+        '')
+
         (readonly "/nix/store")
-        (readwrite (noescape "~/.librewolf"))
-        (readwrite (noescape "~/.cache/librewolf"))
-        (readwrite (noescape "~/Downloads"))
+        (readwrite (noescape "${config.home.homeDirectory}/.librewolf"))
+        (readwrite (noescape "${config.home.homeDirectory}/.cache/librewolf"))
+        (readwrite (noescape "${config.home.homeDirectory}/Downloads"))
       ]);
 
   commonSearch = {

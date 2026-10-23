@@ -1,10 +1,10 @@
-{ ... }:
+{ lib, ... }:
 
 {
   sops = {
-    defaultSopsFile = ../secrets/secrets.json;
+    defaultSopsFile = ../../secrets/secrets.json;
     defaultSopsFormat = "json";
-    age.keyFile = "/persist/var/lib/sops-nix/keys.txt";
+    age.keyFile = lib.mkDefault "/var/lib/sops-nix/keys.txt";
 
     secrets = {
       "mathieu/password".neededForUsers = true;

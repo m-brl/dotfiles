@@ -1,12 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   programs = {
-    nix-ld.enable = true;
     dconf.enable = true;
     yubikey-manager.enable = true;
-    zsh.enable = true;
-    git.enable = true;
 
     uwsm.enable = true;
     hyprland = {
@@ -19,17 +16,5 @@
     hyprlock.enable = true;
 
     virt-manager.enable = true;
-
-    nh = {
-      enable = true;
-
-      flake = "/etc/nixos";
-
-      clean = {
-        enable = true;
-        dates = "weekly";
-        extraArgs = "--keep-since 7d --keep 5";
-      };
-    };
   };
 }

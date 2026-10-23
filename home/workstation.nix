@@ -20,18 +20,14 @@ let
 in
 {
   imports = [
+    ./common.nix
     ./desktop
-    ./editors
-    ./shell
+    ./shell/kitty.nix
     ./programs
     ./services.nix
     ./emails.nix
     ./drive.nix
   ];
-
-  home.username = "mathieu";
-  home.homeDirectory = "/home/mathieu";
-  home.stateVersion = "25.11";
 
   xdg = {
     mimeApps = {
@@ -59,28 +55,18 @@ in
   };
 
   home.sessionVariables = {
-    EDITOR = "nvim";
     TERMINAL = "kitty";
   };
 
-  programs.home-manager.enable = true;
-
   home.packages = with pkgs; [
     # Dev
-    devenv
     alacritty
-    vectorcode
     obsidian
-    clang cmake pkg-config gnumake ninja cgdb gdb valgrind
-    patchelf
-    uv pixi
-    python314
-    ed jetbrains.clion jetbrains.idea jetbrains.pycharm jetbrains.mps
+    jetbrains.clion jetbrains.idea jetbrains.pycharm jetbrains.mps
     kicad
     quickshell
     obs-studio
     cura-appimage
-    fzf
 
     # Browser
     brave vivaldi chromium libreoffice tor-browser
@@ -104,8 +90,6 @@ in
     # Tools
     kdePackages.dolphin kdePackages.konsole
     modem-manager-gui
-    rclone rsync
-    zip unzip ripgrep fd
     wl-clipboard
     cifs-utils
   ];
