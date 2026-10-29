@@ -681,6 +681,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
         "secrets": "secrets",
+        "sonyd": "sonyd",
         "sops-nix": "sops-nix",
         "stylix": "stylix"
       }
@@ -720,6 +721,26 @@
       "original": {
         "type": "git",
         "url": "ssh://git@github.com/m-brl/secrets"
+      }
+    },
+    "sonyd": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793202393,
+        "narHash": "sha256-1frNmeBUamFh1ses+rqNliZYYmUZLb7MruzCWZL9c/Q=",
+        "owner": "m-brl",
+        "repo": "sonyd",
+        "rev": "071c57ce6fcf8006150a1c29340f77ceef66e44e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "m-brl",
+        "repo": "sonyd",
+        "type": "github"
       }
     },
     "sops-nix": {

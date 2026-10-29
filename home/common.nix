@@ -4,6 +4,7 @@
   imports = [
     ./editors
     ./shell
+    ./gpg.nix
     ./programs/cli.nix
   ];
 

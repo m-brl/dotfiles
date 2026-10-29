@@ -8,7 +8,10 @@
 
       availableKernelModules = [ "xhci_pci" "nvme" "thunderbolt" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
 
-      luks.devices."crypted".device = "/dev/disk/by-uuid/d3e43a99-e6ef-45eb-b407-71253cb54203";
+      luks.devices."crypted" = {
+        device = "/dev/disk/by-uuid/d3e43a99-e6ef-45eb-b407-71253cb54203";
+        crypttabExtraOpts = [ "fido2-device=auto" ];
+      };
     };
 
     kernelModules = [

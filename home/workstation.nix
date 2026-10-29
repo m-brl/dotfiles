@@ -1,4 +1,4 @@
-{ config, pkgs, slib, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 let
   jail = inputs.jail-nix.lib.init pkgs;
@@ -14,7 +14,6 @@ let
         (dbus { talk = [ "org.freedesktop.portal.*" ]; })
 
         (readwrite (noescape "~/.config/vesktop"))
-        (readwrite (noescape "~/.local/share/keyring-vesktop"))
         (readwrite (noescape "~/Downloads"))
       ]);
 in
@@ -67,6 +66,7 @@ in
     quickshell
     obs-studio
     cura-appimage
+    freecad
 
     # Browser
     brave vivaldi chromium libreoffice tor-browser

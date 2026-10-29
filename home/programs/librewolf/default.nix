@@ -1,26 +1,40 @@
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 let
-  jail = inputs.jail-nix.lib.init pkgs;
+  librewolf-webgl = pkgs.makeDesktopItem {
+    exec = "${pkgs.librewolf}/bin/librewolf -P mathieu-webgl --name librewolf-webgl %U";
 
-  librewolf-jailed =
-    jail "librewolf" config.programs.librewolf.finalPackage
-      (with jail.combinators; [
-        network
-        gui
-        gpu
-        pipewire
+    name = "librewolf-webgl";
+    desktopName = "LibreWolf WebGL";
+    genericName = "Web Browser";
+    categories = [ "Network" "WebBrowser" ];
+    icon = "librewolf";
+    terminal = false;
 
-        (add-runtime ''
-          ${pkgs.coreutils}/bin/mkdir -p ${config.home.homeDirectory}/.cache/librewolf
-          ${pkgs.coreutils}/bin/mkdir -p ${config.home.homeDirectory}/Downloads
-        '')
+    mimeTypes = [
+      "text/html" "text/xml"
+      "application/xhtml+xml" "application/vnd.mozilla.xul+xml"
+      "x-scheme-handler/http" "x-scheme-handler/https"
+    ];
 
-        (readonly "/nix/store")
-        (readwrite (noescape "${config.home.homeDirectory}/.librewolf"))
-        (readwrite (noescape "${config.home.homeDirectory}/.cache/librewolf"))
-        (readwrite (noescape "${config.home.homeDirectory}/Downloads"))
-      ]);
+    startupNotify = true;
+    startupWMClass = "librewolf-webgl";
+
+    actions = {
+      new-window = {
+        name = "New Window";
+        exec = "librewolf -P mathieu-webgl --new-window %U";
+      };
+      new-private-window = {
+        name = "New Private Window";
+        exec = "librewolf -P mathieu-webgl --private-window %U";
+      };
+      profile-manager-window = {
+        name = "Profile Manager";
+        exec = "librewolf --ProfileManager";
+      };
+    };
+  };
 
   commonSearch = {
     default = "startpage";
@@ -253,6 +267,6 @@ in
   };
 
   home.packages = [
-    (lib.hiPrio librewolf-jailed)
+    librewolf-webgl
   ];
 }

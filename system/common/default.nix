@@ -17,6 +17,7 @@ in
     config.allowUnfree = true;
     overlays = [
       inputs.nix-openclaw.overlays.default
+      inputs.sonyd.overlays.default
     ];
     config.permittedInsecurePackages = [
       "openclaw-2026.6.33"
