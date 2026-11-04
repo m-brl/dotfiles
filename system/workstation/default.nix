@@ -17,10 +17,7 @@
   sops.age.keyFile = "/persist/var/lib/sops-nix/keys.txt";
 
   environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "nvidia";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    __NV_PRIME_RENDER_OFFLOAD = "1";
+    AQ_DRM_DEVICES = "/dev/dri/intel-igpu:/dev/dri/nvidia-dgpu";
     NVD_BACKEND = "direct";
     WLR_NO_HARDWARE_CURSORS = "1";
   };

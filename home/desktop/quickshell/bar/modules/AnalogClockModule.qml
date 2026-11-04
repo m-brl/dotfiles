@@ -17,7 +17,7 @@ Item {
         color: "transparent"
         radius: width / 2
         border.width: 1
-        border.color: Qt.alpha(Frappe.overlay0, 0.5)
+        border.color: Qt.alpha(Theme.base1, 0.5)
 
         Rectangle { // second
             id: secondHand
@@ -26,7 +26,7 @@ Item {
             radius: 1
             anchors.centerIn: parent
 
-            color: Frappe.green
+            color: Theme.primary
             transform: [
                 Rotation {
                     origin.x: secondHand.width / 2
@@ -45,7 +45,7 @@ Item {
             radius: 3
             anchors.centerIn: parent
 
-            color: Frappe.text
+            color: Theme.text
             transform: [
                 Rotation {
                     origin.x: hourHand.width / 2
@@ -64,7 +64,7 @@ Item {
             radius: 3
             anchors.centerIn: parent
 
-            color: Frappe.text
+            color: Theme.text
             transform: [
                 Rotation {
                     origin.x: minuteHand.width / 2
@@ -82,13 +82,13 @@ Item {
             height: 10
             radius: 5
             anchors.centerIn: parent
-            color: Frappe.text
+            color: Theme.text
             Rectangle {
                 width: 6
                 height: 6
                 radius: 3
                 anchors.centerIn: parent
-                color: Frappe.green
+                color: Theme.primary
             }
         }
 
@@ -99,7 +99,7 @@ Item {
                 width: 3
                 height: 15
                 radius: 2
-                color: Frappe.text
+                color: Theme.text
                 anchors.centerIn: parent
                 property real angle: modelData * 30
                 property real radAngle: angle * (Math.PI / 180)
@@ -125,7 +125,7 @@ Item {
                 width: 2
                 height: 5
                 radius: 1
-                color: Frappe.surface2
+                color: Theme.base2
                 anchors.centerIn: parent
                 property real angle: modelData * 30
                 property real radAngle: angle * (Math.PI / 180)

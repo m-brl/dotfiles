@@ -15,6 +15,8 @@
     nix-mineral.url = "github:cynicsketch/nix-mineral";
     nix-mineral.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixos-hardware.url = "github:m-brl/nixos-hardware";
+
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -36,8 +38,8 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
+    nur.url = "github:nix-community/NUR";
+    nur.inputs.nixpkgs.follows = "nixpkgs";
 
     sonyd.url = "github:m-brl/sonyd";
     sonyd.inputs.nixpkgs.follows = "nixpkgs";
@@ -58,6 +60,7 @@
           inputs.stylix.nixosModules.stylix
           inputs.sops-nix.nixosModules.sops
           inputs.home-manager.nixosModules.home-manager
+          inputs.nur.modules.nixos.default
         ] ++ modules;
       };
     in

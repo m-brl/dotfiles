@@ -8,10 +8,6 @@
       enable = true;
     };
 
-    modemmanager = {
-      enable = true;
-    };
-
     firewall = {
       enable = true;
     };

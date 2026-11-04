@@ -178,7 +178,7 @@ let
     "browser.uiCustomization.state" = builtins.toJSON (builtins.fromJSON (builtins.readFile ./layout.json));
   };
 
-  addons = inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system};
+  addons = pkgs.nur.repos.rycee.firefox-addons;
 
 in
   {

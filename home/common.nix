@@ -21,7 +21,6 @@
   home.packages = with pkgs; [
     # Dev
     devenv
-    vectorcode
     clang cmake pkg-config gnumake ninja cgdb gdb valgrind
     patchelf
     uv pixi

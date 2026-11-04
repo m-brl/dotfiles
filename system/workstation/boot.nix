@@ -3,7 +3,6 @@
 {
   boot = {
     initrd = {
-      systemd.enable = true;
       supportedFilesystems = [ "btrfs" ];
 
       availableKernelModules = [ "xhci_pci" "nvme" "thunderbolt" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];

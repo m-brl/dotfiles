@@ -41,8 +41,8 @@ PopupWindow {
 
     visible: false
     color: "transparent"
-    width: 410
-    height: 500
+    width: 1000
+    height: 750
 
     property bool anim: false
 
@@ -157,6 +157,29 @@ PopupWindow {
             id: content
             anchors.fill: parent
 
+            Item {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 200
+
+                RowLayout {
+                    anchors.fill: parent
+
+                    Graph {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 200
+                        floor: 15
+                        history: root.batteryService.powerHistory
+                    }
+
+                    Graph {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 200
+                        floor: 15
+                        history: root.batteryService.powerHistory
+                    }
+                }
+            }
+
             RowLayout { // RING
                 Layout.fillWidth: true
                 Layout.preferredHeight: 250
@@ -217,23 +240,6 @@ PopupWindow {
                 }
             }
 
-            SteppedSlider {
-                id: fanSpeedSlider
-                visible: root.mode === BatteryWindow.RingMode.Fan
-                Layout.preferredWidth: 300
-                Layout.preferredHeight: 30
-                Layout.alignment: Qt.AlignHCenter
-                value: root.batteryService.fanLevel
-                steps: 8
-
-                onMoved: {
-                    if (value === 8) {
-                        Quickshell.execDetached(["sh", "-c", `pkexec fan-control disengaged`])
-                    } else {
-                        Quickshell.execDetached(["sh", "-c", `pkexec fan-control ${value}`])
-                    }
-                }
-            }
 
             Rectangle {
                 Layout.preferredHeight: 60

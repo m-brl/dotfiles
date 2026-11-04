@@ -23,12 +23,22 @@ Item {
     property int fanSpeed: 0
     property int fanLevel: 0
 
+    // Consommation CPU (RAPL)
+    property real cpuPower: 0
+    property var powerHistory: []
+    property int powerHistoryLength: 60
+    property real lastEnergy: -1
+    property real lastEnergyTime: 0
+    property real maxEnergyRange: 0
+
     Timer {
         interval: 1000
         running: true
         repeat: true
         onTriggered: {
             tlpStat.running = true
+            fan.running = true
+            cpuEnergy.running = true
         }
     }
 
@@ -89,12 +99,39 @@ Item {
         }
     }
 
-    Timer {
-        interval: 1000
+    Process {
+        id: cpuEnergyRange
+        command: ["cat", "/sys/class/powercap/intel-rapl:0/max_energy_range_uj"]
+        stdout: StdioCollector {
+            onStreamFinished: root.maxEnergyRange = parseFloat(text) || 0
+        }
         running: true
-        repeat: true
-        onTriggered: {
-            fan.running = true
+    }
+
+    Process {
+        id: cpuEnergy
+        command: ["cat", "/sys/class/powercap/intel-rapl:0/energy_uj"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                var energy = parseFloat(text)
+                if (isNaN(energy)) return   // fichier illisible (permissions ?)
+                var now = Date.now()
+
+                if (root.lastEnergy >= 0) {
+                    var delta = energy - root.lastEnergy
+                    if (delta < 0) delta += root.maxEnergyRange   // compteur qui boucle
+                    var dt = (now - root.lastEnergyTime) * 1000    // ms → µs
+                    if (dt > 0) {
+                        root.cpuPower = delta / dt
+                        var history = root.powerHistory.concat([root.cpuPower])
+                        if (history.length > root.powerHistoryLength)
+                        history = history.slice(-root.powerHistoryLength)
+                        root.powerHistory = history
+                    }
+                }
+                root.lastEnergy = energy
+                root.lastEnergyTime = now
+            }
         }
     }
 }

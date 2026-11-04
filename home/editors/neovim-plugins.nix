@@ -196,13 +196,6 @@
       enable = true;
     };
 
-    vectorcode = {
-      enable = true;
-      integrations.codecompanion.enable = true;
-      settings = {
-        async_backend = "lsp";
-      };
-    };
     codecompanion = {
       enable = true;
       settings = {

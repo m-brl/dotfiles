@@ -6,6 +6,7 @@
 #    ./openclaw.nix
     ./element.nix
     ./newsboat.nix
+    ./cookie.nix
   ];
 
   programs = {
@@ -17,7 +18,7 @@
 
     password-store = {
       enable = true;
-      package = pkgs.pass-wayland;
+      package = pkgs.pass-wayland.withExtensions (exts: [ exts.pass-otp ]);
     };
 
     thunderbird = {
@@ -27,6 +28,28 @@
           isDefault = true;
         };
       };
+    };
+
+    keepassxc = {
+      enable = true;
+    };
+  };
+
+  systemd.user.services.stremio = {
+    Unit = {
+      Description = "Stremio Service";
+      After = [ "graphical-session.target" ];
+      Wants = [ "graphical-session.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+
+    Service = {
+      Type = "simple";
+      ExecStart = "${pkgs.stremio-service}/bin/stremio-service";
+    };
+
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
     };
   };
 }

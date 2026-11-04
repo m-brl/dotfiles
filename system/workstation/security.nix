@@ -6,17 +6,22 @@
   ];
 
   nix-mineral = {
-    enable = true;
+    enable = false;
     filesystems.normal = {
       "/etc".enable = false;
       "/var".enable = false;
       "/home".enable = false;
     };
 
-    settings.debug = {
-      quiet-boot = false;
-      panic-reboot = false;
-      efipstore = true;
+    settings = {
+      kernel = {
+        oops-panic = false;
+      };
+      debug = {
+        quiet-boot = false;
+        panic-reboot = false;
+        efipstore = true;
+      };
     };
   };
 

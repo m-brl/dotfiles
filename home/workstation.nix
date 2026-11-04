@@ -77,7 +77,6 @@ in
     wl-clipboard cliphist wlr-randr
     playerctl brightnessctl
     libnotify
-    pass-wayland
     solaar
 
     # Multimedia
@@ -89,7 +88,6 @@ in
 
     # Tools
     kdePackages.dolphin kdePackages.konsole
-    modem-manager-gui
     wl-clipboard
     cifs-utils
   ];
