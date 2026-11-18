@@ -1,4 +1,4 @@
-{config, pkgs, inputs, ...}:
+{ ... }:
 
 {
   programs.nixvim.plugins = {
@@ -11,6 +11,7 @@
         pyright.enable = true;
         ruff.enable = true;
         nixd.enable = true;
+        ts_ls.enable = true;
         qmlls.enable = true;
         qmlls.cmd = [ "qmlls" "-E" ];
       };
@@ -213,13 +214,17 @@
               end
               '';
           };
+          acp.extend.claude_code.defaults.session_config_options = {
+            mode = "auto";
+          };
         };
-        strategies = {
+        interactions = {
           agent = {
             adapter = "claude_code";
           };
           chat = {
             adapter = "claude_code";
+            tools.opts.approval_mode = "auto";
           };
           inline = {
             adapter = "ollama_qwen";

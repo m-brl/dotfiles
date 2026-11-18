@@ -1,4 +1,4 @@
-{ lib, config, osConfig, pkgs, inputs, slib, ... }:
+{ osConfig, pkgs, inputs, slib, ... }:
 
 let
   claude-agent-acp-wrapper = slib.wrapSecrets {

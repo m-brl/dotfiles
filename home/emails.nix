@@ -79,7 +79,7 @@ in
       secret = secretData.proton;
       imap = { host = "127.0.0.1"; port = 1143; tls.enable = true; tls.useStartTls = true; tls.certificatesFile = protonCert; };
       smtp = { host = "127.0.0.1"; port = 1025; tls.enable = true; tls.useStartTls = true; tls.certificatesFile = protonCert; };
-      passwordCommand = "${lib.getExe pkgs.pass-wayland} show email/proton";
+      passwordCommand = "${lib.getExe config.programs.password-store.package} show email/proton";
       folders = [ "All Mail" "Drafts" "Sent" "Archive" "Spam" "Trash" ];
     };
 
@@ -93,6 +93,8 @@ in
       folders = [ "Drafts" "Sent Items" "Trash" "Archive" ];
     };
   };
+
+  home.packages = [ pkgs.oama pkgs.libsecret ];
 
   home.file.".mailcap".text = ''
     text/html; ${lib.getExe pkgs.w3m} -dump -T text/html %s; copiousoutput; nametemplate=%s.html

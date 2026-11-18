@@ -1,4 +1,4 @@
-{ lib, osConfig, config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 let
     openTicket = pkgs.writeShellScriptBin "ticket" ''
@@ -41,6 +41,9 @@ in
     ];
 
     initContent = ''
+      # Disable terminal bell (tab completion, line editor errors, etc.)
+      unsetopt BEEP
+
       print "Welcome $(whoami)"
       print "You have \033[32m$(zellij list-sessions | wc -l)\033[0m zellij sessions running"
     '' + lib.optionalString config.programs.notmuch.enable ''
@@ -72,6 +75,9 @@ in
       enable = true;
       enableZshIntegration = true;
       enableBashIntegration = true;
+      settings = {
+        profiles.claude-code = "$directory$git_branch$claude_model$claude_context$claude_cost";
+      };
     };
 
     zoxide = {

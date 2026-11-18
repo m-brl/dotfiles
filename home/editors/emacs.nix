@@ -1,14 +1,9 @@
-{ lib, config, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
-  imports = [
-
-  ];
-
   programs.emacs = {
     enable = true;
 
     package = pkgs.emacs-pgtk;
   };
-
 }
